@@ -486,7 +486,8 @@
             }
 
             /* Prep tables → card layout */
-            .prep-table tr:first-child {
+            .prep-table:not(:has(thead)) > tbody > tr:first-child,
+            .prep-table thead {
                 display: none;
             }
 
@@ -1083,8 +1084,7 @@
                     </tr>
                     <tr class="cost-total-row">
                         <td data-label="項目"><b>💰 費用總計</b></td>
-                        <td class="center red-text" data-label="金額"><b>${grandTotal.toLocaleString()}</b></td>
-                        <td data-label="備註"></td>
+                        <td class="center red-text" data-label="金額" colspan="2"><b>${grandTotal.toLocaleString()}</b></td>
                     </tr>
                     <tr class="cost-total-row">
                         <td data-label="項目"><b>💵 尚未付款</b></td>
