@@ -127,17 +127,17 @@
             flex-wrap: wrap;
         }
 
-            .tabs-actions {
-                margin-left: auto;
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            }
+        .tabs-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-            .tabs-actions .share-btn {
-                float: none;
-                margin-top: 0;
-            }
+        .tabs-actions .share-btn {
+            float: none;
+            margin-top: 0;
+        }
 
         .tabs {
             display: flex;
@@ -875,6 +875,10 @@
                 display: none !important;
             }
 
+            .no-print {
+                display: none !important;
+            }
+
             .tabs-wrap {
                 display: none !important;
             }
@@ -895,7 +899,7 @@
                 display: block;
             }
 
-            #app > .content-box {
+            #app>.content-box {
                 display: none;
             }
 
@@ -922,6 +926,10 @@
 
         .print-all {
             display: none;
+        }
+
+        .no-print {
+            display: inline-block;
         }
     </style>
 </head>
@@ -1098,7 +1106,7 @@
             text += `當日費用：$${dailyTotal.toLocaleString()}`;
 
             if (navigator.share) {
-                navigator.share({ title: `四國五日遊 ${day.day}`, text: text }).catch(() => {});
+                navigator.share({ title: `四國五日遊 ${day.day}`, text: text }).catch(() => { });
                 return;
             }
 
@@ -1131,7 +1139,7 @@
             });
 
             if (navigator.share) {
-                navigator.share({ title: '四國五日遊 全部行程', text: text }).catch(() => {});
+                navigator.share({ title: '四國五日遊 全部行程', text: text }).catch(() => { });
                 return;
             }
 
@@ -1797,7 +1805,7 @@
         function renderAllDaysForPrint() {
             return itineraryData.map((day, i) => {
                 let html = renderDay(i);
-                html = html.replace(/<button class="share-btn"[^>]*>[^<]*<\/button>/, '');
+                html = html.replace(/class="share-btn"/, 'class="share-btn no-print"');
                 html = html.replace(/^<div class="content-box" data-day="[^"]+">/, '<div class="content-box" data-day="print">');
                 return html;
             }).join('');
@@ -1808,7 +1816,7 @@
         setupThemeToggle();
 
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(() => {});
+            navigator.serviceWorker.register('/sw.js').catch(() => { });
         }
     </script>
 </body>
