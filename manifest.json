@@ -1,0 +1,9 @@
+{
+  "name": "四國五日遊行程",
+  "short_name": "四國行程",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3498db",
+  "icons": []
+}
