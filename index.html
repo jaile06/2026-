@@ -107,6 +107,13 @@
             font-size: 16px;
             font-weight: bold;
             margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+        }
+
+        .footer-stat {
+            white-space: nowrap;
         }
 
         /* 景點小圖與標籤 */
@@ -240,6 +247,331 @@
             text-align: center;
             font-weight: bold;
         }
+
+        /* Weather badge */
+        .weather-badge {
+            display: inline-block;
+            background: #f0f8ff;
+            border: 1px solid #b0d4f1;
+            border-radius: 12px;
+            padding: 2px 10px;
+            font-size: 13px;
+            font-weight: normal;
+            margin-left: 8px;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .weather-badge .weather-temp {
+            font-weight: bold;
+        }
+
+        .weather-badge .rain-low {
+            color: #3498db;
+        }
+
+        .weather-badge .rain-mid {
+            color: #e67e22;
+        }
+
+        .weather-badge .rain-high {
+            color: #e74c3c;
+        }
+
+        .weather-pending {
+            color: #999;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        /* Share button */
+        .share-btn {
+            background: #eaf4fd;
+            border: 1px solid #b0d4f1;
+            color: #2980b9;
+            padding: 4px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            float: right;
+            margin-top: -2px;
+        }
+
+        .share-btn:hover {
+            background: #d4eaf7;
+        }
+
+        .share-btn:active {
+            background: #b0d4f1;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* ===== Mobile Responsive ===== */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            /* Tab bar: horizontal scroll */
+            .tabs {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin-left: 0;
+                scrollbar-width: none;
+            }
+
+            .tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab {
+                white-space: nowrap;
+                flex-shrink: 0;
+                padding: 5px 12px;
+                font-size: 13px;
+            }
+
+            /* Itinerary table → card layout */
+            table.itinerary-table thead {
+                display: none;
+            }
+
+            table.itinerary-table,
+            table.itinerary-table tbody,
+            table.itinerary-table tr,
+            table.itinerary-table td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            table.itinerary-table tr {
+                border: 1px solid #ddd;
+                margin-bottom: 10px;
+                padding: 10px;
+                background: #fafafa;
+                border-radius: 6px;
+            }
+
+            table.itinerary-table td {
+                border: none;
+                padding: 4px 8px 4px 90px;
+                text-align: left !important;
+                position: relative;
+                font-size: 13px;
+            }
+
+            table.itinerary-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 8px;
+                font-weight: bold;
+                color: #555;
+                width: 75px;
+                font-size: 12px;
+            }
+
+            table.itinerary-table td:first-child {
+                background: #e6f4ca;
+                font-weight: bold;
+                font-size: 15px;
+                border-radius: 4px 4px 0 0;
+                padding-left: 90px;
+            }
+
+            /* Daily total row */
+            table.itinerary-table tr.daily-total-row {
+                background: transparent;
+                border: none;
+                padding: 8px 0;
+                text-align: right;
+            }
+
+            table.itinerary-table tr.daily-total-row td {
+                padding-left: 8px;
+                text-align: right !important;
+            }
+
+            table.itinerary-table tr.daily-total-row td::before {
+                display: none;
+            }
+
+            /* Prep section: sidebar → horizontal tabs */
+            .prep-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .prep-menu {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+                scrollbar-width: none;
+            }
+
+            .prep-menu::-webkit-scrollbar {
+                display: none;
+            }
+
+            .prep-menu-item {
+                white-space: nowrap;
+                flex-shrink: 0;
+                padding: 10px 12px;
+                font-size: 13px;
+                border-bottom: none;
+            }
+
+            .prep-menu-item.active {
+                border-right: none;
+                border-left: none;
+                border-bottom: 3px solid #3498db;
+                margin-right: 0;
+                background: white;
+            }
+
+            .prep-content {
+                padding: 15px 10px;
+            }
+
+            /* Prep tables → card layout */
+            .prep-table tr:first-child {
+                display: none;
+            }
+
+            .prep-table,
+            .prep-table tbody,
+            .prep-table tr,
+            .prep-table td {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .prep-table tr {
+                border: 1px solid #ddd;
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 6px;
+                background: #fafafa;
+            }
+
+            .prep-table td {
+                border: none;
+                padding: 4px 8px 4px 80px;
+                text-align: left !important;
+                position: relative;
+            }
+
+            .prep-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 8px;
+                font-weight: bold;
+                color: #555;
+                width: 68px;
+                font-size: 12px;
+            }
+
+            /* Prep table total rows */
+            .prep-table tr.daily-total-row {
+                background: transparent;
+                border: none;
+                padding: 4px 0;
+                text-align: right;
+            }
+
+            .prep-table tr.daily-total-row td {
+                padding-left: 8px;
+                text-align: right !important;
+            }
+
+            .prep-table tr.daily-total-row td::before {
+                display: none;
+            }
+
+            /* Packing list: two columns → single column */
+            .pack-columns {
+                flex-direction: column !important;
+            }
+
+            .pack-columns > div {
+                padding-right: 0 !important;
+            }
+
+            /* Footer summary: wrap stats */
+            .footer-summary {
+                flex-direction: column;
+                gap: 4px;
+                font-size: 14px;
+            }
+
+            /* Images */
+            .spot-img {
+                height: 55px;
+            }
+
+            .content-box {
+                padding: 10px;
+            }
+
+            .day-header {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            /* Map links more tappable */
+            .map-link {
+                padding: 2px 0;
+            }
+
+            /* Weather badge: own line on mobile */
+            .weather-badge {
+                display: block;
+                margin-left: 0;
+                margin-top: 6px;
+                width: fit-content;
+            }
+
+            /* Share button: full width at bottom */
+            .share-btn {
+                float: none;
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin-top: 12px;
+                padding: 10px;
+                font-size: 14px;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 
@@ -250,14 +582,167 @@
     <div id="app"></div>
 
     <div class="footer-summary">
-        全部費用：<span class="red-text">TWD 44,501</span>&nbsp;&nbsp;&nbsp;
-        每人平均：<span class="red-text">TWD 22,250</span>&nbsp;&nbsp;&nbsp;
-        每人每日平均：<span class="red-text">TWD 4,450</span>&nbsp;&nbsp;&nbsp;
-        平均匯率：<span class="red-text">0.22</span>&nbsp;&nbsp;&nbsp;
-        最後修改：<span class="red-text">2026-03-05 16:30:00</span>
+        <span class="footer-stat">全部費用：<span class="red-text">TWD 44,501</span></span>
+        <span class="footer-stat">每人平均：<span class="red-text">TWD 22,250</span></span>
+        <span class="footer-stat">每人每日平均：<span class="red-text">TWD 4,450</span></span>
+        <span class="footer-stat">平均匯率：<span class="red-text">0.22</span></span>
+        <span class="footer-stat">最後修改：<span class="red-text">2026-03-05 16:30:00</span></span>
     </div>
 
+    <div id="toast" class="toast"></div>
+
     <script>
+        // === Weather Code Map (WMO) ===
+        const weatherCodeMap = {
+            0: { desc: '晴天', emoji: '☀️' },
+            1: { desc: '大致晴朗', emoji: '🌤️' },
+            2: { desc: '局部多雲', emoji: '⛅' },
+            3: { desc: '陰天', emoji: '☁️' },
+            45: { desc: '霧', emoji: '🌫️' },
+            48: { desc: '霧凇', emoji: '🌫️' },
+            51: { desc: '小毛雨', emoji: '🌦️' },
+            53: { desc: '毛雨', emoji: '🌦️' },
+            55: { desc: '大毛雨', emoji: '🌧️' },
+            61: { desc: '小雨', emoji: '🌧️' },
+            63: { desc: '中雨', emoji: '🌧️' },
+            65: { desc: '大雨', emoji: '🌧️' },
+            71: { desc: '小雪', emoji: '🌨️' },
+            73: { desc: '中雪', emoji: '🌨️' },
+            75: { desc: '大雪', emoji: '🌨️' },
+            77: { desc: '雪粒', emoji: '🌨️' },
+            80: { desc: '陣雨', emoji: '🌦️' },
+            81: { desc: '中陣雨', emoji: '🌦️' },
+            82: { desc: '大陣雨', emoji: '⛈️' },
+            85: { desc: '小陣雪', emoji: '🌨️' },
+            86: { desc: '大陣雪', emoji: '🌨️' },
+            95: { desc: '雷雨', emoji: '⛈️' },
+            96: { desc: '雷雨+冰雹', emoji: '⛈️' },
+            99: { desc: '強雷雨+冰雹', emoji: '⛈️' }
+        };
+
+        // Day index → location mapping
+        const dayLocationMap = {
+            0: { lat: 34.3333, lon: 134.05, city: '高松' },
+            1: { lat: 34.3333, lon: 134.05, city: '高松' },
+            2: { lat: 34.1833, lon: 133.8167, city: '琴平' },
+            3: { lat: 34.3333, lon: 134.05, city: '高松' },
+            4: { lat: 34.3333, lon: 134.05, city: '高松' }
+        };
+
+        // Trip dates for matching API response
+        const tripDates = ['2026-05-18', '2026-05-19', '2026-05-20', '2026-05-21', '2026-05-22'];
+
+        // Cached weather data
+        let weatherData = null;
+        let weatherError = false;
+
+        async function fetchWeather() {
+            const today = new Date();
+            const tripStart = new Date('2026-05-18');
+            const daysUntil = Math.ceil((tripStart - today) / (1000 * 60 * 60 * 24));
+
+            if (daysUntil > 16) {
+                weatherData = null;
+                return;
+            }
+
+            try {
+                const [takamatsu, kotohira] = await Promise.all([
+                    fetch('https://api.open-meteo.com/v1/forecast?latitude=34.3333&longitude=134.05&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia/Tokyo&start_date=2026-05-18&end_date=2026-05-22').then(r => r.json()),
+                    fetch('https://api.open-meteo.com/v1/forecast?latitude=34.1833&longitude=133.8167&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia/Tokyo&start_date=2026-05-18&end_date=2026-05-22').then(r => r.json())
+                ]);
+
+                weatherData = {};
+                tripDates.forEach((date, i) => {
+                    const src = (i === 2) ? kotohira : takamatsu;
+                    const idx = src.daily.time.indexOf(date);
+                    if (idx !== -1) {
+                        weatherData[date] = {
+                            code: src.daily.weather_code[idx],
+                            max: Math.round(src.daily.temperature_2m_max[idx]),
+                            min: Math.round(src.daily.temperature_2m_min[idx]),
+                            rain: src.daily.precipitation_probability_max[idx]
+                        };
+                    }
+                });
+                render();
+            } catch (e) {
+                console.warn('Weather fetch failed:', e);
+                weatherError = true;
+            }
+        }
+
+        function getWeatherHtml(dayIndex) {
+            const date = tripDates[dayIndex];
+            const today = new Date();
+            const tripStart = new Date('2026-05-18');
+            const daysUntil = Math.ceil((tripStart - today) / (1000 * 60 * 60 * 24));
+
+            if (daysUntil > 16) {
+                const daysToForecast = daysUntil - 16;
+                return `<span class="weather-pending">🌤️ 預報將於 ${daysToForecast} 天後顯示</span>`;
+            }
+
+            if (weatherError) {
+                return '<span class="weather-pending">⚠️ 天氣載入失敗</span>';
+            }
+
+            if (!weatherData || !weatherData[date]) {
+                return '<span class="weather-pending">⏳ 載入天氣中...</span>';
+            }
+
+            const w = weatherData[date];
+            const weather = weatherCodeMap[w.code] || { desc: '未知', emoji: '❓' };
+            let rainClass = 'rain-low';
+            if (w.rain > 60) rainClass = 'rain-high';
+            else if (w.rain > 30) rainClass = 'rain-mid';
+
+            return `<span class="weather-badge">${weather.emoji} <span class="weather-temp">${w.max}°/${w.min}°</span> <span class="${rainClass}">🌧${w.rain}%</span></span>`;
+        }
+
+        // === Share / Copy Itinerary ===
+        function shareDay(dayIndex) {
+            const day = itineraryData[dayIndex];
+            if (!day) return;
+
+            let text = `🗾 四國五日遊 ${day.day} ${day.date}\n`;
+            text += '━━━━━━━━━━━━━━━\n';
+
+            let dailyTotal = 0;
+            day.events.forEach(ev => {
+                const loc = ev.location.replace(/<[^>]+>/g, '').replace('📍 ', '').trim();
+                const content = ev.content.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+                text += `${ev.time} ${loc} — ${content}\n`;
+
+                const totalNum = parseInt(ev.total.replace(/[^0-9]/g, '')) || 0;
+                if (ev.total && (ev.total.includes('¥') || ev.total.includes('$'))) dailyTotal += totalNum;
+            });
+
+            text += '━━━━━━━━━━━━━━━\n';
+            text += `當日費用：¥${dailyTotal.toLocaleString()}`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('已複製到剪貼簿！');
+            }).catch(() => {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('已複製到剪貼簿！');
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
         const itineraryData = [
             {
                 day: "Day 1", date: "05-18(一)", dateShort: "18(一)",
@@ -353,9 +838,9 @@
                     <table class="prep-table">
                         <tr><th>去程航空</th><th>去程出發</th><th>去程總時</th><th>去程抵達</th><th>回程航空</th><th>回程出發</th><th>回程總時</th><th>回程抵達</th><th>總計費用</th></tr>
                         <tr>
-                            <td class="center">中華航空<br>CI 278</td><td class="center"><b>06:55</b><br>TPE 桃園</td><td class="center">2小時<br>40分鐘</td><td class="center"><b>10:35</b><br>TAK 高松</td>
-                            <td class="center">中華航空<br>CI 279</td><td class="center"><b>11:30</b><br>TAK 高松</td><td class="center">2小時<br>45分鐘</td><td class="center"><b>13:15</b><br>TPE 桃園</td>
-                            <td class="center red-text"><b>TWD 23,345</b></td>
+                            <td class="center" data-label="去程航空">中華航空<br>CI 278</td><td class="center" data-label="去程出發"><b>06:55</b><br>TPE 桃園</td><td class="center" data-label="去程總時">2小時<br>40分鐘</td><td class="center" data-label="去程抵達"><b>10:35</b><br>TAK 高松</td>
+                            <td class="center" data-label="回程航空">中華航空<br>CI 279</td><td class="center" data-label="回程出發"><b>11:30</b><br>TAK 高松</td><td class="center" data-label="回程總時">2小時<br>45分鐘</td><td class="center" data-label="回程抵達"><b>13:15</b><br>TPE 桃園</td>
+                            <td class="center red-text" data-label="總計費用"><b>TWD 23,345</b></td>
                         </tr>
                     </table>
                     <div style="margin-top:20px; font-size:14px; line-height:1.6;">
@@ -376,24 +861,24 @@
                     <table class="prep-table">
                         <tr><th style="width:100px;">日期</th><th>飯店</th><th>房型</th><th>費用</th></tr>
                         <tr>
-                            <td class="center">5/18~5/20<br>共 2 晚</td>
-                            <td><a href="https://maps.google.com/?q=FAV+HOTEL+TAKAMATSU" class="map-link">FAV HOTEL TAKAMATSU</a><br>訂單編號：ORD0029070089<br>15:00入住, 10:00退房</td>
-                            <td>高級客房 1張大床</td>
-                            <td class="center red-text">TWD 7,618</td>
+                            <td class="center" data-label="日期">5/18~5/20<br>共 2 晚</td>
+                            <td data-label="飯店"><a href="https://maps.google.com/?q=FAV+HOTEL+TAKAMATSU" class="map-link">FAV HOTEL TAKAMATSU</a><br>訂單編號：ORD0029070089<br>15:00入住, 10:00退房</td>
+                            <td data-label="房型">高級客房 1張大床</td>
+                            <td class="center red-text" data-label="費用">TWD 7,618</td>
                         </tr>
                         <tr>
-                            <td class="center">5/20~5/21<br>共 1 晚</td>
-                            <td><a href="https://maps.google.com/?q=御宿+敷島館" class="map-link">琴平溫泉 御宿 敷島館</a><br>訂單編號：ORD0029069483<br>15:00入住, 11:00退房, 享用4種私湯</td>
-                            <td>雙人房 1張大床</td>
-                            <td class="center red-text">TWD 5,907</td>
+                            <td class="center" data-label="日期">5/20~5/21<br>共 1 晚</td>
+                            <td data-label="飯店"><a href="https://maps.google.com/?q=御宿+敷島館" class="map-link">琴平溫泉 御宿 敷島館</a><br>訂單編號：ORD0029069483<br>15:00入住, 11:00退房, 享用4種私湯</td>
+                            <td data-label="房型">雙人房 1張大床</td>
+                            <td class="center red-text" data-label="費用">TWD 5,907</td>
                         </tr>
                         <tr>
-                            <td class="center">5/21~5/22<br>共 1 晚</td>
-                            <td><a href="https://maps.google.com/?q=Dormy+Inn+Takamatsu" class="map-link">Dormy Inn 高松天然溫泉飯店</a><br>訂單編號：ORD0029069597<br>15:00入住, 11:00退房, 有免費宵夜拉麵</td>
-                            <td>標準房 1張大床</td>
-                            <td class="center red-text">TWD 4,699</td>
+                            <td class="center" data-label="日期">5/21~5/22<br>共 1 晚</td>
+                            <td data-label="飯店"><a href="https://maps.google.com/?q=Dormy+Inn+Takamatsu" class="map-link">Dormy Inn 高松天然溫泉飯店</a><br>訂單編號：ORD0029069597<br>15:00入住, 11:00退房, 有免費宵夜拉麵</td>
+                            <td data-label="房型">標準房 1張大床</td>
+                            <td class="center red-text" data-label="費用">TWD 4,699</td>
                         </tr>
-                        <tr><td colspan="3"></td><td class="center red-text"><b>總計: 18,224</b></td></tr>
+                        <tr class="daily-total-row"><td colspan="3"></td><td class="center red-text"><b>總計: 18,224</b></td></tr>
                     </table>
                 `;
             } else if (currentPrepTab === 'prep') {
@@ -402,22 +887,22 @@
                     <table class="prep-table">
                         <tr><th style="width:50px;">完成</th><th style="width:150px;">地點/事由</th><th>行程內容</th><th style="width:80px;">費用</th><th style="width:50px;">份數</th><th style="width:80px;">合計</th></tr>
                         <tr>
-                            <td class="center">✅</td><td>訂購 JR PASS</td><td>🈹 <a href="#">JR PASS 香川迷你鐵路&渡輪兩日券 (電子票券)</a><br>易遊網訂單 ORD0029072422</td><td class="center red-text">1,161</td><td class="center">2</td><td class="center red-text">2,322</td>
+                            <td class="center" data-label="完成">✅</td><td data-label="事由">訂購 JR PASS</td><td data-label="內容">🈹 <a href="#">JR PASS 香川迷你鐵路&渡輪兩日券 (電子票券)</a><br>易遊網訂單 ORD0029072422</td><td class="center red-text" data-label="費用">1,161</td><td class="center" data-label="份數">2</td><td class="center red-text" data-label="合計">2,322</td>
                         </tr>
                         <tr>
-                            <td class="center">✅</td><td>訂購 實體網卡</td><td>🈹 <a href="#">日本 5天飆網吃到飽卡 (Docomo)</a><br>易遊網訂單 ORD0029070700</td><td class="center red-text">255</td><td class="center">2</td><td class="center red-text">510</td>
+                            <td class="center" data-label="完成">✅</td><td data-label="事由">訂購 實體網卡</td><td data-label="內容">🈹 <a href="#">日本 5天飆網吃到飽卡 (Docomo)</a><br>易遊網訂單 ORD0029070700</td><td class="center red-text" data-label="費用">255</td><td class="center" data-label="份數">2</td><td class="center red-text" data-label="合計">510</td>
                         </tr>
                         <tr>
-                            <td class="center">✅</td><td>旅遊保險</td><td>海外突發疾病與不便險 (含法定傳染病)</td><td class="center red-text">500</td><td class="center">2</td><td class="center red-text">1,000</td>
+                            <td class="center" data-label="完成">✅</td><td data-label="事由">旅遊保險</td><td data-label="內容">海外突發疾病與不便險 (含法定傳染病)</td><td class="center red-text" data-label="費用">500</td><td class="center" data-label="份數">2</td><td class="center red-text" data-label="合計">1,000</td>
                         </tr>
                         <tr>
-                            <td class="center">✅</td><td>Visit Japan Web</td><td>完成 QR Code 申報 (入境審查+海關申報)，請截圖存於相簿。</td><td class="center">-</td><td class="center">2</td><td class="center">-</td>
+                            <td class="center" data-label="完成">✅</td><td data-label="事由">Visit Japan Web</td><td data-label="內容">完成 QR Code 申報 (入境審查+海關申報)，請截圖存於相簿。</td><td class="center" data-label="費用">-</td><td class="center" data-label="份數">2</td><td class="center" data-label="合計">-</td>
                         </tr>
                     </table>
                 `;
             } else if (currentPrepTab === 'pack') {
                 contentHtml = `
-                    <div style="display:flex; justify-content:space-between; font-size:14px; line-height:1.8;">
+                    <div class="pack-columns" style="display:flex; justify-content:space-between; font-size:14px; line-height:1.8;">
                         <div style="flex:1; padding-right:20px;">
                             <h3 class="prep-title">個人攜帶物品</h3>
                             1. ⬜ 護照 (效期需滿半年)<br>
@@ -485,7 +970,7 @@
             let locations = rawLocations.map(l => l.replace('📍 ', '').trim()).join(' ➔ ');
 
             let html = '<div class="content-box">';
-            html += `<div class="day-header"><span class="day-badge">${day.day.replace(" ", "")}</span> ${day.date} 【行程概要】 ${locations}</div>`;
+            html += `<div class="day-header"><button class="share-btn" onclick="shareDay(${dayIndex})">📋 分享行程</button><span class="day-badge">${day.day.replace(" ", "")}</span> ${day.date} 【行程概要】 ${locations} ${getWeatherHtml(dayIndex)}</div>`;
 
             html += `
             <table class="itinerary-table">
@@ -514,18 +999,18 @@
 
                 html += `
                     <tr>
-                        <td class="center">${ev.time}</td>
-                        <td style="font-weight:bold;">${ev.location}</td>
-                        <td>${ev.content}</td>
-                        <td class="center"><span style="border: 1px solid #cca; background: #ffe; padding: 2px 4px; font-size:12px;">${ev.item}</span></td>
-                        <td class="center ${costClass}">${ev.cost}</td>
-                        <td class="center">${ev.qty}</td>
-                        <td class="center ${totalClass}">${ev.total}</td>
+                        <td class="center" data-label="時間">${ev.time}</td>
+                        <td style="font-weight:bold;" data-label="地點事由">${ev.location}</td>
+                        <td data-label="行程內容">${ev.content}</td>
+                        <td class="center" data-label="相關物品"><span style="border: 1px solid #cca; background: #ffe; padding: 2px 4px; font-size:12px;">${ev.item}</span></td>
+                        <td class="center ${costClass}" data-label="費用">${ev.cost}</td>
+                        <td class="center" data-label="數量">${ev.qty}</td>
+                        <td class="center ${totalClass}" data-label="合計">${ev.total}</td>
                     </tr>
                 `;
             });
             html += `
-                    <tr><td colspan="4"></td><td colspan="3" style="text-align: right;">當日累計：<span class="red-text">¥${dailyTotal}</span></td></tr>
+                    <tr class="daily-total-row"><td colspan="4"></td><td colspan="3" style="text-align: right;">當日累計：<span class="red-text">¥${dailyTotal}</span></td></tr>
                 </tbody>
             </table></div>`;
             return html;
@@ -542,6 +1027,7 @@
         }
 
         render();
+        fetchWeather();
     </script>
 </body>
 
