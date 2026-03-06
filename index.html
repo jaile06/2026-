@@ -103,6 +103,30 @@
             color: red;
         }
 
+        .green-text {
+            color: #27ae60;
+        }
+
+        /* Cost tab styles */
+        .cost-table {
+            margin-bottom: 10px;
+        }
+
+        .cost-divider-row td {
+            border-left: none !important;
+            border-right: none !important;
+            padding: 2px !important;
+            background: transparent !important;
+        }
+
+        .cost-total-row {
+            background-color: #f9f9f9;
+        }
+
+        .cost-total-row td {
+            font-size: 15px;
+        }
+
         .footer-summary {
             font-size: 16px;
             font-weight: bold;
@@ -571,6 +595,20 @@
                 font-size: 14px;
                 box-sizing: border-box;
             }
+
+            /* Cost tab mobile overrides */
+            .cost-table tr.cost-divider-row {
+                display: none;
+            }
+
+            .cost-table tr.cost-total-row {
+                background: #f0f7e6;
+                border: 2px solid #8bc34a;
+            }
+
+            .cost-table tr.cost-total-row td {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -582,11 +620,11 @@
     <div id="app"></div>
 
     <div class="footer-summary">
-        <span class="footer-stat">全部費用：<span class="red-text">TWD 44,501</span></span>
-        <span class="footer-stat">每人平均：<span class="red-text">TWD 22,250</span></span>
-        <span class="footer-stat">每人每日平均：<span class="red-text">TWD 4,450</span></span>
+        <span class="footer-stat">全部費用：<span class="red-text">TWD 47,702</span></span>
+        <span class="footer-stat">每人平均：<span class="red-text">TWD 23,851</span></span>
+        <span class="footer-stat">每人每日平均：<span class="red-text">TWD 4,770</span></span>
         <span class="footer-stat">平均匯率：<span class="red-text">0.22</span></span>
-        <span class="footer-stat">最後修改：<span class="red-text">2026-03-05 16:30:00</span></span>
+        <span class="footer-stat">最後修改：<span class="red-text">2026-03-06 10:00:00</span></span>
     </div>
 
     <div id="toast" class="toast"></div>
@@ -817,11 +855,13 @@
             itineraryData.forEach((day, i) => {
                 html += `<div class="tab ${(i + 1 === currentTab ? 'active' : '')}" onclick="switchTab(${i + 1})">${day.dateShort}</div>`;
             });
-            html += '<div class="tab">費用</div>';
+            html += `<div class="tab ${(currentTab === 6 ? 'active' : '')}" onclick="switchTab(6)">費用</div>`;
             html += '</div>';
 
             if (currentTab === 0) {
                 html += renderPrep();
+            } else if (currentTab === 6) {
+                html += renderCost();
             } else {
                 html += renderDay(currentTab - 1);
             }
@@ -960,6 +1000,170 @@
                     </div>
                 </div>
             `;
+        }
+
+        function renderCost() {
+            // Calculate daily JPY totals from itinerary data
+            const exchangeRate = 0.22; // 1 JPY = 0.22 TWD
+            let totalJPY = 0;
+            const dailyJPY = [];
+            itineraryData.forEach((day, i) => {
+                let dayTotal = 0;
+                day.events.forEach(ev => {
+                    if (ev.total && ev.total.includes('¥')) {
+                        dayTotal += parseInt(ev.total.replace(/[^0-9]/g, '')) || 0;
+                    }
+                });
+                dailyJPY.push(dayTotal);
+                totalJPY += dayTotal;
+            });
+            const jpyInTWD = Math.round(totalJPY * exchangeRate);
+
+            // Fixed TWD costs (from prep data)
+            const flight = 23345;
+            const hotel = 18224;
+            const insurance = 1000;
+            const simCard = 510;
+            const jrPass = 2322;
+            const grandTotal = flight + hotel + insurance + simCard + jrPass + jpyInTWD;
+            const perPerson = Math.round(grandTotal / 2);
+
+            // JR PASS usage calculation
+            // 香川迷你鐵路&渡輪兩日券: covers JR/Kotoden trains + Shikoku Ferry in Kagawa (2 days)
+            // Actual individual fares if purchased separately:
+            const jrPassUsage = [
+                { route: '高松港↔土庄港 渡輪（來回）', fare: 1400 },  // ¥700 × 2
+                { route: '高松↔琴平 琴電（來回）', fare: 1280 }       // ¥640 × 2
+            ];
+            const jrPassTotalUse = jrPassUsage.reduce((s, u) => s + u.fare, 0); // ¥2,680
+            const jrPassPriceTWD = 1161; // per person TWD price from EzTravel
+
+            let html = '<div class="content-box">';
+            html += '<h3 class="prep-title" style="font-size:18px; margin-bottom: 15px;">2人5日所有費用（台幣）</h3>';
+
+            // Table 1: Cost Summary
+            html += `
+            <table class="prep-table cost-table">
+                <thead>
+                    <tr><th style="width:150px;">項目</th><th style="width:120px;">金額</th><th>備註</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="項目">✈️ 機票</td>
+                        <td class="center red-text" data-label="金額">${flight.toLocaleString()}</td>
+                        <td data-label="備註">中華航空 CI278 / CI279（每人 ${Math.round(flight/2).toLocaleString()}）</td>
+                    </tr>
+                    <tr>
+                        <td data-label="項目">🏨 飯店</td>
+                        <td class="center red-text" data-label="金額">${hotel.toLocaleString()}</td>
+                        <td data-label="備註">FAV 2晚 7,618 ＋ 敷島館 1晚 5,907 ＋ Dormy Inn 1晚 4,699</td>
+                    </tr>
+                    <tr>
+                        <td data-label="項目">🛡️ 旅遊保險</td>
+                        <td class="center red-text" data-label="金額">${insurance.toLocaleString()}</td>
+                        <td data-label="備註">海外突發疾病與不便險（每人 ${Math.round(insurance/2).toLocaleString()}）</td>
+                    </tr>
+                    <tr>
+                        <td data-label="項目">📶 網卡</td>
+                        <td class="center red-text" data-label="金額">${simCard.toLocaleString()}</td>
+                        <td data-label="備註">日本5天飆網吃到飽 Docomo（每人 ${Math.round(simCard/2).toLocaleString()}）</td>
+                    </tr>
+                    <tr>
+                        <td data-label="項目">🎫 票券</td>
+                        <td class="center red-text" data-label="金額">${jrPass.toLocaleString()}</td>
+                        <td data-label="備註">JR PASS 香川迷你鐵路＆渡輪兩日券（每人 ${Math.round(jrPass/2).toLocaleString()}）</td>
+                    </tr>
+                    <tr>
+                        <td data-label="項目">💴 日本境內花費</td>
+                        <td class="center red-text" data-label="金額">${jpyInTWD.toLocaleString()}</td>
+                        <td data-label="備註">餐費、門票、交通等（¥${totalJPY.toLocaleString()} × ${exchangeRate}）</td>
+                    </tr>
+                    <tr class="cost-divider-row">
+                        <td colspan="3"></td>
+                    </tr>
+                    <tr class="cost-total-row">
+                        <td data-label="項目"><b>💰 費用總計</b></td>
+                        <td class="center red-text" data-label="金額"><b>${grandTotal.toLocaleString()}</b></td>
+                        <td data-label="備註"></td>
+                    </tr>
+                    <tr class="cost-total-row">
+                        <td data-label="項目"><b>💵 尚未付款</b></td>
+                        <td class="center red-text" data-label="金額"><b>¥${totalJPY.toLocaleString()}</b></td>
+                        <td data-label="備註">日幣現金部分（≈ TWD ${jpyInTWD.toLocaleString()}）</td>
+                    </tr>
+                    <tr class="cost-total-row">
+                        <td data-label="項目"><b>👤 每人5天總計</b></td>
+                        <td class="center red-text" data-label="金額"><b>${perPerson.toLocaleString()}</b></td>
+                        <td data-label="備註">每人每日平均 ${Math.round(perPerson/5).toLocaleString()}</td>
+                    </tr>
+                </tbody>
+            </table>`;
+
+            // Table 2: Ticket/Pass Usage
+            html += '<h3 class="prep-title" style="font-size:18px; margin-top: 30px; margin-bottom: 15px;">各票券使用情況</h3>';
+            html += `
+            <table class="prep-table cost-table">
+                <thead>
+                    <tr>
+                        <th>票券名稱</th>
+                        <th style="width:100px;">購買金額</th>
+                        <th style="width:100px;">實際使用金額</th>
+                        <th>使用明細</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="票券名稱">🚃 JR PASS 香川迷你鐵路＆渡輪兩日券</td>
+                        <td class="center red-text" data-label="購買金額">TWD ${jrPassPriceTWD.toLocaleString()}<br><span style="font-size:12px;color:#666;">（每人）</span></td>
+                        <td class="center" data-label="實際使用金額">¥${jrPassTotalUse.toLocaleString()}<br><span style="font-size:12px;color:#666;">≈ TWD ${Math.round(jrPassTotalUse * exchangeRate).toLocaleString()}</span></td>
+                        <td data-label="使用明細" style="font-size:13px;">${jrPassUsage.map(u => u.route + ' ¥' + u.fare.toLocaleString()).join('<br>')}</td>
+                    </tr>
+                </tbody>
+            </table>`;
+
+            // Daily JPY breakdown
+            html += '<h3 class="prep-title" style="font-size:18px; margin-top: 30px; margin-bottom: 15px;">各日日幣花費明細</h3>';
+            html += `
+            <table class="prep-table cost-table">
+                <thead>
+                    <tr>
+                        <th style="width:100px;">日期</th>
+                        <th style="width:120px;">日幣花費</th>
+                        <th style="width:120px;">折合台幣</th>
+                        <th>花費項目</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+
+            itineraryData.forEach((day, i) => {
+                const items = [];
+                day.events.forEach(ev => {
+                    if (ev.total && ev.total.includes('¥')) {
+                        const loc = ev.location.replace(/<[^>]+>/g, '').replace('📍 ', '').trim();
+                        items.push(loc + ' ' + ev.total);
+                    }
+                });
+                html += `
+                    <tr>
+                        <td class="center" data-label="日期">${day.day}<br>${day.date}</td>
+                        <td class="center red-text" data-label="日幣花費">¥${dailyJPY[i].toLocaleString()}</td>
+                        <td class="center" data-label="折合台幣">≈ ${Math.round(dailyJPY[i] * exchangeRate).toLocaleString()}</td>
+                        <td data-label="花費項目" style="font-size:13px;">${items.join('、')}</td>
+                    </tr>`;
+            });
+
+            html += `
+                    <tr class="daily-total-row">
+                        <td class="center"><b>合計</b></td>
+                        <td class="center red-text"><b>¥${totalJPY.toLocaleString()}</b></td>
+                        <td class="center red-text"><b>≈ TWD ${jpyInTWD.toLocaleString()}</b></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>`;
+
+            html += '</div>';
+            return html;
         }
 
         function renderDay(dayIndex) {
