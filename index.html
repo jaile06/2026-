@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>四國五日遊行程 (含準備區塊)</title>
+    <style>
+        body {
+            font-family: Arial, "微軟正黑體", sans-serif;
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: -1px;
+            position: relative;
+            z-index: 1;
+            margin-left: 10px;
+        }
+
+        .tab {
+            padding: 5px 15px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 2px;
+            border-bottom: 1px solid black;
+            color: #2c93d4;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            border: 1px solid black;
+            border-bottom: 1px solid white;
+            color: black;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+
+        .content-box {
+            border: 1px solid black;
+            padding: 15px;
+            background: white;
+            margin-bottom: 20px;
+        }
+
+        .day-header {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .day-badge {
+            background: #00bef0;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 5px;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        table.itinerary-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table.itinerary-table th,
+        table.itinerary-table td {
+            border: 1px solid black;
+            padding: 8px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        table.itinerary-table th {
+            background-color: #e6f4ca;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        table.itinerary-table td {
+            vertical-align: middle;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .red-text {
+            color: red;
+        }
+
+        .footer-summary {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* 景點小圖與標籤 */
+        .spot-img {
+            height: 70px;
+            width: auto;
+            border-radius: 4px;
+            margin-right: 5px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .img-row {
+            margin-top: 5px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .badge-bus {
+            background: #e67e22;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .badge-train {
+            background: #27ae60;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .badge-ferry {
+            background: #2980b9;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .map-link {
+            font-size: 13px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 5px;
+        }
+
+        .map-link:hover {
+            text-decoration: underline;
+            color: #e74c3c;
+        }
+
+        .loc-pin {
+            color: #e74c3c;
+            font-size: 14px;
+        }
+
+        /* 準備頁籤區域樣式 */
+        .prep-container {
+            display: flex;
+            border: 1px solid black;
+            background: white;
+            min-height: 400px;
+        }
+
+        .prep-menu {
+            width: 150px;
+            background: #faf3e8;
+            /* 淡橘色背景對齊截圖 */
+            border-right: 1px solid #ccc;
+        }
+
+        .prep-menu-item {
+            padding: 15px 10px;
+            border-bottom: 2px solid white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .prep-menu-item.active {
+            background: white;
+            border-right: 2px solid white;
+            /* 隱藏右側線條 */
+            border-left: 4px solid #3498db;
+            color: #3498db;
+            margin-right: -1px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .prep-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .prep-title {
+            background: #3498db;
+            color: white;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            margin-top: 0;
+            font-size: 15px;
+        }
+
+        .prep-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .prep-table th,
+        .prep-table td {
+            border: 1px solid #888;
+            padding: 8px;
+            vertical-align: middle;
+        }
+
+        .prep-table th {
+            background-color: #e6f4ca;
+            /* 淺草綠 */
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>四國五日遊：05-18 (一) ~ 05-22 (五)</h2>
+
+    <div id="app"></div>
+
+    <div class="footer-summary">
+        全部費用：<span class="red-text">TWD 44,501</span>&nbsp;&nbsp;&nbsp;
+        每人平均：<span class="red-text">TWD 22,250</span>&nbsp;&nbsp;&nbsp;
+        每人每日平均：<span class="red-text">TWD 4,450</span>&nbsp;&nbsp;&nbsp;
+        平均匯率：<span class="red-text">0.22</span>&nbsp;&nbsp;&nbsp;
+        最後修改：<span class="red-text">2026-03-05 16:30:00</span>
+    </div>
+
+    <script>
+        const itineraryData = [
+            {
+                day: "Day 1", date: "05-18(一)", dateShort: "18(一)",
+                events: [
+                    { time: "04:30", location: "托運報到", content: "CI278 報到 (第2航廈)，06:55 起飛。預計 10:35 抵達高松機場", item: "護照、機票", cost: "——", qty: "2", total: "——" },
+                    { time: "11:30", location: "<span class='loc-pin'>📍</span> 高松機場 ➔ 瓦町", content: "搭乘 <span class='badge-bus'>🚌 機場利木津巴士</span>。<br><b>班次：11:30 發車 ➔ 12:15 抵達瓦町站</b>。<a href='https://maps.google.com/?q=高松瓦町駅' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "IC卡/日幣", cost: "¥210", qty: "2", total: "¥420" },
+                    { time: "13:00", location: "<span class='loc-pin'>📍</span> FAV 高松酒店", content: "抵達飯店辦理寄放 (訂單:0089)。<a href='https://maps.google.com/?q=FAV+HOTEL+TAKAMATSU' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "飯店憑證", cost: "已預付", qty: "1", total: "——" },
+                    { time: "13:30", location: "<span class='loc-pin'>📍</span> 天勝本店", content: "【午餐】海鮮穴子魚飯。<a href='https://maps.google.com/?q=天勝本店+高松' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "¥700", qty: "2", total: "¥1,400" },
+                    { time: "14:30", location: "<span class='loc-pin'>📍</span> 栗林公園", content: "園林散步、搭乘南湖和船。<a href='https://maps.google.com/?q=栗林公園' target='_blank' class='map-link'>🗺️ 栗林公園</a><div class='img-row'><img src='images/day1/ritsurin-garden-bridge.jpg' class='spot-img'><img src='images/day1/ritsurin-garden-boat.jpg' class='spot-img'><img src='images/day1/ritsurin-garden-rocks.jpg' class='spot-img'><img src='images/day1/ritsurin-garden-summer.jpg' class='spot-img'></div>", item: "門票", cost: "¥172", qty: "2", total: "¥344" },
+                    { time: "16:00", location: "<span class='loc-pin'>📍</span> 掬月亭", content: "喝抹茶配和菓子。<a href='https://maps.google.com/?q=掬月亭' target='_blank' class='map-link'>🗺️ 掬月亭</a><div class='img-row'><img src='images/day1/kikugetsutei-tea-house.jpg' class='spot-img'></div>", item: "現金", cost: "¥150", qty: "2", total: "¥300" },
+                    { time: "17:30", location: "<span class='loc-pin'>📍</span> こよみ", content: "【晚餐】家庭定食。<a href='https://maps.google.com/?q=こよみ+高松' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "¥450", qty: "2", total: "¥900" }
+                ]
+            },
+            {
+                day: "Day 2", date: "05-19(二)", dateShort: "19(二)",
+                events: [
+                    { time: "06:30", location: "早起早餐", content: "享用 fav 飯店早餐", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "08:02", location: "<span class='loc-pin'>📍</span> 高松➔土庄", content: "搭乘 <span class='badge-ferry'>⛴️ 小豆島輪船</span>。08:02 高松港發 ➔ 09:02 抵達土庄港。<br>港口附近可順訪「太陽的贈禮」公共藝術<div class='img-row'><img src='images/day2/sun-gift-sculpture.jpg' class='spot-img'></div>", item: "JR PASS", cost: "已預付", qty: "2", total: "——" },
+                    { time: "12:30", location: "<span class='loc-pin'>📍</span> Restle", content: "【午餐】橄欖豬炸豬排。位於橄欖公園內。<a href='https://maps.google.com/?q=Restle+小豆島' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "¥378", qty: "2", total: "¥756" },
+                    { time: "14:00", location: "<span class='loc-pin'>📍</span> 橄欖公園", content: "漫步橄欖林拍照、風車取景、租借掃帚。<a href='https://maps.google.com/?q=小豆島橄欖公園' target='_blank' class='map-link'>🗺️ 橄欖公園</a><div class='img-row'><img src='images/day2/olive-park-windmill.jpg' class='spot-img'></div>", item: "JR PASS", cost: "——", qty: "2", total: "——" },
+                    { time: "15:30", location: "<span class='loc-pin'>📍</span> 天使之路", content: "漫步海中央沙堤。<a href='https://maps.google.com/?q=天使之路+小豆島' target='_blank' class='map-link'>🗺️ 天使之路</a><div class='img-row'><img src='images/day2/shodoshima-angel-road.jpg' class='spot-img'></div>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "16:30", location: "<span class='loc-pin'>📍</span> 岡田屋", content: "【晚餐】在地居酒屋。土庄港旁步行 5 分鐘，途經迷路之街（土渕海峽）<a href='https://maps.google.com/?q=岡田屋+土庄' target='_blank' class='map-link'>🗺️ Google Maps</a><div class='img-row'><img src='images/day2/maze-town-alley.jpg' class='spot-img'></div>", item: "現金", cost: "¥500", qty: "2", total: "¥1,000" },
+                    { time: "18:30", location: "<span class='loc-pin'>📍</span> 回程渡輪", content: "18:30 土庄港發 ➔ 19:30 返抵高松港", item: "JR PASS", cost: "已預付", qty: "2", total: "——" }
+                ]
+            },
+            {
+                day: "Day 3", date: "05-20(三)", dateShort: "20(三)",
+                events: [
+                    { time: "06:30", location: "早起早餐", content: "享用 fav 飯店早餐後退房。搭琴電前往琴平", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "07:20", location: "交通移動", content: "高松出發 → 琴平站（琴電/電車）", item: "IC卡/車資", cost: "——", qty: "2", total: "——" },
+                    { time: "08:30", location: "<span class='loc-pin'>📍</span> 抵達琴平", content: "步行前往金刀比羅宮參道<a href='https://maps.google.com/?q=琴平駅' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "08:45", location: "<span class='loc-pin'>📍</span> 參拜", content: "金刀比羅宮主參道與正殿（視體力走到大門內段）<a href='https://maps.google.com/?q=金刀比羅宮' target='_blank' class='map-link'>🗺️ 金刀比羅宮</a><div class='img-row'><img src='images/day3/konpira-shrine.jpg' class='spot-img'></div>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "10:45", location: "回程散步", content: "參道商店街簡單逛（不新增景點）", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "11:30", location: "<span class='loc-pin'>📍</span> 飯店寄行李", content: "抵達 御宿 敷島館 (訂單:9483)，先寄行李免拖行<a href='https://maps.google.com/?q=琴平溫泉御宿敷島館' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "飯店憑證", cost: "已預付", qty: "1", total: "——" },
+                    { time: "12:30", location: "<span class='loc-pin'>📍</span> 豐富午餐", content: "【田中屋】：牛肉烏龍麵與壽司。步行 3 分鐘<a href='https://maps.google.com/?q=田中屋+琴平' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "¥210", qty: "2", total: "¥420" },
+                    { time: "13:30", location: "空檔補足", content: "參道周邊散步/休息（保留彈性）", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "17:00", location: "<span class='loc-pin'>📍</span> 私人湯屋", content: "享用飯店 4 種免費 私人湯屋 (竹、檜、陶、岩) <div class='img-row'><img src='images/day3/private-onsen-bath.jpg' class='spot-img'></div>", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "17:30", location: "<span class='loc-pin'>📍</span> 輕食晚餐", content: "【利神】：在地居酒屋單點串燒。步行 8 分鐘<a href='https://maps.google.com/?q=利神+琴平' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "信用卡", cost: "¥700", qty: "2", total: "¥1,400" }
+                ]
+            },
+            {
+                day: "Day 4", date: "05-21(四)", dateShort: "21(四)",
+                events: [
+                    { time: "06:30", location: "早起朝湯", content: "[早起型] 早餐前清晨使用私人湯屋", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "07:00", location: "飯店早餐", content: "享用敷島館精緻早餐後回高松", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "08:30", location: "交通移動", content: "琴平出發 → 高松市區", item: "IC卡/車資", cost: "——", qty: "2", total: "——" },
+                    { time: "10:00", location: "抵達市區", content: "預留移動/休息時間", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "13:00", location: "<span class='loc-pin'>📍</span> 飯店進房", content: "入住 Dormy Inn 高松 (訂單:9597) 寄放行李<a href='https://maps.google.com/?q=Dormy+Inn+高松' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "護照", cost: "已預付", qty: "1", total: "——" },
+                    { time: "14:00", location: "<span class='loc-pin'>📍</span> 豐富午餐", content: "【燒肉 Hirai】：橄欖牛燒肉。由飯店步行 5 分鐘<a href='https://maps.google.com/?q=燒肉Hirai+高松' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "信用卡", cost: "¥840", qty: "2", total: "¥1,680" },
+                    { time: "15:30", location: "前往屋島", content: "市區出發 → 屋島", item: "IC卡", cost: "——", qty: "2", total: "——" },
+                    { time: "16:30", location: "<span class='loc-pin'>📍</span> 屋島展望台", content: "搭車往屋島山上看日落景致<a href='https://maps.google.com/?q=屋島展望台' target='_blank' class='map-link'>🗺️ 屋島展望台</a><div class='img-row'><img src='images/day4/yashima-seto-sea-view.jpg' class='spot-img'><img src='images/day4/yashima-panorama.jpg' class='spot-img'></div>", item: "IC卡", cost: "¥210", qty: "2", total: "¥420" },
+                    { time: "18:30", location: "<span class='loc-pin'>📍</span> 輕食晚餐", content: "【瀨戶內 Kitchen】：精緻家庭和食。步行 6 分鐘<a href='https://maps.google.com/?q=瀨戶內Kitchen+高松' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "¥500", qty: "2", total: "¥1,000" },
+                    { time: "21:30", location: "<span class='loc-pin'>📍</span> 宵夜拉麵", content: "飯店免費 夜鳴拉麵 (1 樓提供)", item: "——", cost: "免費", qty: "2", total: "——" }
+                ]
+            },
+            {
+                day: "Day 5", date: "05-22(五)", dateShort: "22(五)",
+                events: [
+                    { time: "06:30", location: "早起早餐", content: "享用 Dormy Inn 溫泉飯店早餐", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "09:10", location: "<span class='loc-pin'>📍</span> 機場巴士", content: "「縣廳通」站搭車，就在飯店旁，免拉行李移動<a href='https://maps.google.com/?q=縣廳通站+高松' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "日幣", cost: "¥210", qty: "2", total: "¥420" },
+                    { time: "11:30", location: "<span class='loc-pin'>📍</span> 歸途起飛", content: "CI279 返台 (13:15 抵達桃園)<a href='https://maps.google.com/?q=高松機場' target='_blank' class='map-link'>🗺️ Google Maps</a>", item: "護照", cost: "已預付", qty: "2", total: "——" }
+                ]
+            }
+        ];
+
+        let currentTab = 0; // 0 = 準備, 1-5 = Day1-5
+        let currentPrepTab = 'flight'; // flight, hotel, prep, pack, info
+
+        function render() {
+            let html = '<div class="tabs">';
+            html += `<div class="tab ${(currentTab === 0 ? 'active' : '')}" onclick="switchTab(0)">準備</div>`;
+            itineraryData.forEach((day, i) => {
+                html += `<div class="tab ${(i + 1 === currentTab ? 'active' : '')}" onclick="switchTab(${i + 1})">${day.dateShort}</div>`;
+            });
+            html += '<div class="tab">費用</div>';
+            html += '</div>';
+
+            if (currentTab === 0) {
+                html += renderPrep();
+            } else {
+                html += renderDay(currentTab - 1);
+            }
+
+            document.getElementById('app').innerHTML = html;
+        }
+
+        function renderPrep() {
+            let contentHtml = '';
+
+            if (currentPrepTab === 'flight') {
+                contentHtml = `
+                    <h3 class="prep-title">機票</h3>
+                    <table class="prep-table">
+                        <tr><th>去程航空</th><th>去程出發</th><th>去程總時</th><th>去程抵達</th><th>回程航空</th><th>回程出發</th><th>回程總時</th><th>回程抵達</th><th>總計費用</th></tr>
+                        <tr>
+                            <td class="center">中華航空<br>CI 278</td><td class="center"><b>06:55</b><br>TPE 桃園</td><td class="center">2小時<br>40分鐘</td><td class="center"><b>10:35</b><br>TAK 高松</td>
+                            <td class="center">中華航空<br>CI 279</td><td class="center"><b>11:30</b><br>TAK 高松</td><td class="center">2小時<br>45分鐘</td><td class="center"><b>13:15</b><br>TPE 桃園</td>
+                            <td class="center red-text"><b>TWD 23,345</b></td>
+                        </tr>
+                    </table>
+                    <div style="margin-top:20px; font-size:14px; line-height:1.6;">
+                        (平均每人 <span class="red-text">11,672 元</span>)<br><br>
+                        <li><b>起飛 24小時前 ~ 起飛1.5小時前自助登機</b> (華航APP/網頁)</li>
+                        <li><b>起飛 3小時前 ~ 起飛1小時前報到及托運</b>
+                            <ul>
+                                <li>每名旅客可攜帶 1 件 (未滿 7kg) 手提行李。尺寸 56x36x23 CM 以內。</li>
+                                <li>託運行李每人 1 件，每件限重 23KG。</li>
+                            </ul>
+                        </li>
+                        <li>行動電源不可以放機上的置物櫃，要隨身攜帶，放座椅背置物袋，或是放在隨身包。</li>
+                    </div>
+                `;
+            } else if (currentPrepTab === 'hotel') {
+                contentHtml = `
+                    <h3 class="prep-title">飯店 (皆含早餐/提供消夜)</h3>
+                    <table class="prep-table">
+                        <tr><th style="width:100px;">日期</th><th>飯店</th><th>房型</th><th>費用</th></tr>
+                        <tr>
+                            <td class="center">5/18~5/20<br>共 2 晚</td>
+                            <td><a href="https://maps.google.com/?q=FAV+HOTEL+TAKAMATSU" class="map-link">FAV HOTEL TAKAMATSU</a><br>訂單編號：ORD0029070089<br>15:00入住, 10:00退房</td>
+                            <td>高級客房 1張大床</td>
+                            <td class="center red-text">TWD 7,618</td>
+                        </tr>
+                        <tr>
+                            <td class="center">5/20~5/21<br>共 1 晚</td>
+                            <td><a href="https://maps.google.com/?q=御宿+敷島館" class="map-link">琴平溫泉 御宿 敷島館</a><br>訂單編號：ORD0029069483<br>15:00入住, 11:00退房, 享用4種私湯</td>
+                            <td>雙人房 1張大床</td>
+                            <td class="center red-text">TWD 5,907</td>
+                        </tr>
+                        <tr>
+                            <td class="center">5/21~5/22<br>共 1 晚</td>
+                            <td><a href="https://maps.google.com/?q=Dormy+Inn+Takamatsu" class="map-link">Dormy Inn 高松天然溫泉飯店</a><br>訂單編號：ORD0029069597<br>15:00入住, 11:00退房, 有免費宵夜拉麵</td>
+                            <td>標準房 1張大床</td>
+                            <td class="center red-text">TWD 4,699</td>
+                        </tr>
+                        <tr><td colspan="3"></td><td class="center red-text"><b>總計: 18,224</b></td></tr>
+                    </table>
+                `;
+            } else if (currentPrepTab === 'prep') {
+                contentHtml = `
+                    <h3 class="prep-title">事前準備</h3>
+                    <table class="prep-table">
+                        <tr><th style="width:50px;">完成</th><th style="width:150px;">地點/事由</th><th>行程內容</th><th style="width:80px;">費用</th><th style="width:50px;">份數</th><th style="width:80px;">合計</th></tr>
+                        <tr>
+                            <td class="center">✅</td><td>訂購 JR PASS</td><td>🈹 <a href="#">JR PASS 香川迷你鐵路&渡輪兩日券 (電子票券)</a><br>易遊網訂單 ORD0029072422</td><td class="center red-text">1,161</td><td class="center">2</td><td class="center red-text">2,322</td>
+                        </tr>
+                        <tr>
+                            <td class="center">✅</td><td>訂購 實體網卡</td><td>🈹 <a href="#">日本 5天飆網吃到飽卡 (Docomo)</a><br>易遊網訂單 ORD0029070700</td><td class="center red-text">255</td><td class="center">2</td><td class="center red-text">510</td>
+                        </tr>
+                        <tr>
+                            <td class="center">✅</td><td>旅遊保險</td><td>海外突發疾病與不便險 (含法定傳染病)</td><td class="center red-text">500</td><td class="center">2</td><td class="center red-text">1,000</td>
+                        </tr>
+                        <tr>
+                            <td class="center">✅</td><td>Visit Japan Web</td><td>完成 QR Code 申報 (入境審查+海關申報)，請截圖存於相簿。</td><td class="center">-</td><td class="center">2</td><td class="center">-</td>
+                        </tr>
+                    </table>
+                `;
+            } else if (currentPrepTab === 'pack') {
+                contentHtml = `
+                    <div style="display:flex; justify-content:space-between; font-size:14px; line-height:1.8;">
+                        <div style="flex:1; padding-right:20px;">
+                            <h3 class="prep-title">個人攜帶物品</h3>
+                            1. ⬜ 護照 (效期需滿半年)<br>
+                            2. ⬜ 行動電源 + 充電線<br>
+                            3. ⬜ 手機<br>
+                            4. ⬜ 日本網卡 (已附退卡針)<br>
+                            5. ⬜ 錢包 (日幣現金、行動支付、感應信用卡)<br>
+                            6. ⬜ 隨身水壺<br>
+                            7. ⬜ 帽子 + 防曬薄外套<br>
+                            8. ⬜ 面紙、濕紙巾<br>
+                            9. ⬜ 個人藥品 + 保健食物 5天份<br>
+                            10. ⬜ 四天份換洗衣物 (洋蔥式穿搭)<br>
+                            11. ⬜ 牙刷、牙膏<br>
+                            12. ⬜ 拖鞋或舒適好走的布鞋<br>
+                            13. ⬜ 外出用隨身小包
+                        </div>
+                        <div style="flex:1;">
+                            <h3 class="prep-title">共同準備物品</h3>
+                            1. ⬜ 各式電子訂單憑證 (機票、飯店、QR Code截圖)<br>
+                            2. ⬜ 自拍棒或穩定器<br>
+                            3. ⬜ 萬用變壓器/擴充插座 (非必需，日本兩孔即可)<br>
+                            4. ⬜ 雨傘 (晴雨兩用)<br>
+                            5. ⬜ 出國備用藥 (腸胃藥、止痛藥、暈車藥)<br>
+                            6. ⬜ 行李秤<br>
+                            <br>
+                            <h3 class="prep-title">實用資源</h3>
+                            - 手機可用：<b>Google Translate</b> 鏡頭掃描翻譯<br>
+                            - 乘換案內：<b>Japan Transit Planner</b> (查詢火車時刻表)
+                        </div>
+                    </div>
+                `;
+            } else if (currentPrepTab === 'info') {
+                contentHtml = `
+                    <h3 class="prep-title">備用資訊</h3>
+                    <ul style="font-size: 14px; line-height:2.0;">
+                        <li>📍 <b>台北駐日經濟文化代表處 (急難救助)</b><br>在日期間急難救助電話：<span class="red-text">080-6552-4764</span></li>
+                        <li>📍 <b>日本緊急報警通話</b><br>警察局：<span class="red-text">110</span> / 火災、救護車：<span class="red-text">119</span></li>
+                        <li>📍 <b>信用卡掛失專線</b><br>Visa 國際免付費電話：00531-44-0022<br>MasterCard 國際免付費電話：00531-11-3886</li>
+                        <li>📍 <b>護照遺失處理步驟</b><br>1. 先至最近警察局報案，取得「遺失申報證明書」<br>2. 攜帶照片2張及身分證件，至代表處申請入國證明書</li>
+                    </ul>
+                `;
+            }
+
+            return `
+                <div class="prep-container">
+                    <div class="prep-menu">
+                        <div class="prep-menu-item ${currentPrepTab === 'flight' ? 'active' : ''}" onclick="switchPrepTab('flight')">機票</div>
+                        <div class="prep-menu-item ${currentPrepTab === 'hotel' ? 'active' : ''}" onclick="switchPrepTab('hotel')">飯店</div>
+                        <div class="prep-menu-item ${currentPrepTab === 'prep' ? 'active' : ''}" onclick="switchPrepTab('prep')">事前準備</div>
+                        <div class="prep-menu-item ${currentPrepTab === 'pack' ? 'active' : ''}" onclick="switchPrepTab('pack')">攜帶物品</div>
+                        <div class="prep-menu-item ${currentPrepTab === 'info' ? 'active' : ''}" onclick="switchPrepTab('info')">備用資訊</div>
+                    </div>
+                    <div class="prep-content">
+                        ${contentHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDay(dayIndex) {
+            const day = itineraryData[dayIndex];
+            if (!day) return "";
+
+            let rawLocations = day.events.map(e => e.location.replace(/<[^>]+>/g, '')).filter(l => l && !l.includes('移動') && !l.includes('早起') && !l.includes('空檔') && !l.includes('起飛') && l !== '參道周邊' && !l.includes('市區休息'));
+            let locations = rawLocations.map(l => l.replace('📍 ', '').trim()).join(' ➔ ');
+
+            let html = '<div class="content-box">';
+            html += `<div class="day-header"><span class="day-badge">${day.day.replace(" ", "")}</span> ${day.date} 【行程概要】 ${locations}</div>`;
+
+            html += `
+            <table class="itinerary-table">
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">時間</th>
+                        <th style="width: 150px;">地點事由</th>
+                        <th>行程內容</th>
+                        <th style="width: 120px;">相關物品</th>
+                        <th style="width: 60px;">費用</th>
+                        <th style="width: 40px;">數量</th>
+                        <th style="width: 60px;">合計</th>
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+
+            let dailyTotal = 0;
+            day.events.forEach(ev => {
+                let costNum = parseInt(ev.cost.replace(/[^0-9]/g, '')) || 0;
+                let totalNum = parseInt(ev.total.replace(/[^0-9]/g, '')) || 0;
+                if (ev.total && (ev.total.includes('¥') || ev.total.includes('$'))) dailyTotal += totalNum;
+
+                let costClass = (ev.cost.includes('¥') || ev.cost.includes('$')) ? 'red-text' : '';
+                let totalClass = (ev.total.includes('¥') || ev.total.includes('$')) ? 'red-text' : '';
+
+                html += `
+                    <tr>
+                        <td class="center">${ev.time}</td>
+                        <td style="font-weight:bold;">${ev.location}</td>
+                        <td>${ev.content}</td>
+                        <td class="center"><span style="border: 1px solid #cca; background: #ffe; padding: 2px 4px; font-size:12px;">${ev.item}</span></td>
+                        <td class="center ${costClass}">${ev.cost}</td>
+                        <td class="center">${ev.qty}</td>
+                        <td class="center ${totalClass}">${ev.total}</td>
+                    </tr>
+                `;
+            });
+            html += `
+                    <tr><td colspan="4"></td><td colspan="3" style="text-align: right;">當日累計：<span class="red-text">¥${dailyTotal}</span></td></tr>
+                </tbody>
+            </table></div>`;
+            return html;
+        }
+
+        function switchTab(idx) {
+            currentTab = idx;
+            render();
+        }
+
+        function switchPrepTab(tabName) {
+            currentPrepTab = tabName;
+            render();
+        }
+
+        render();
+    </script>
+</body>
+
+</html>
