@@ -1119,6 +1119,12 @@
                         <td class="center" data-label="實際使用金額">¥${jrPassTotalUse.toLocaleString()}<br><span style="font-size:12px;color:#666;">≈ TWD ${Math.round(jrPassTotalUse * exchangeRate).toLocaleString()}</span></td>
                         <td data-label="使用明細" style="font-size:13px;">${jrPassUsage.map(u => u.route + ' ¥' + u.fare.toLocaleString()).join('<br>')}</td>
                     </tr>
+                    <tr>
+                        <td data-label="票券名稱">💳 ICOCA 卡（實體）</td>
+                        <td class="center red-text" data-label="購買金額">¥2,000<br><span style="font-size:12px;color:#666;">（每人）</span></td>
+                        <td class="center" data-label="實際使用金額">¥500 × 2<br><span style="font-size:12px;color:#666;">= ¥1,000 押金</span></td>
+                        <td data-label="使用明細" style="font-size:13px;">JR 高松站購買（自動售票機／綠色窗口）<br>¥500 押金（可退）+ ¥1,500 可用額度<br>💡 感應式，用法同悠遊卡</td>
+                    </tr>
                 </tbody>
             </table>`;
 
