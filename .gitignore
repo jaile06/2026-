@@ -1,4 +1,0 @@
-.vercel
-*.png
-!images/**/*.png
-!images/**/*.jpg
