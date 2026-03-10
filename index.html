@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>四國五日遊行程 (含準備區塊)</title>
+    <title>四國五日遊行程</title>
     <meta property="og:title" content="四國五日遊行程計畫">
     <meta property="og:description" content="2026 日本四國高松5日遊完整行程 — 栗林公園、小豆島、金刀比羅宮、屋島">
     <meta property="og:type" content="website">
@@ -931,6 +931,66 @@
         .no-print {
             display: inline-block;
         }
+
+        /* Daily tips */
+        .day-tips {
+            background: var(--note-amber-bg);
+            border: 1px solid var(--note-amber-border);
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .day-tips-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: var(--note-amber-text);
+        }
+
+        .day-tips-list {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .day-tips-list li {
+            margin-bottom: 4px;
+        }
+
+        /* Checklist */
+        .checklist-progress {
+            font-size: 14px;
+            margin-bottom: 15px;
+            color: var(--muted-text-strong);
+        }
+
+        .checklist-progress .chk-done {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .checklist-item {
+            display: block;
+            font-size: 15px;
+            line-height: 2.2;
+            cursor: pointer;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            vertical-align: middle;
+            cursor: pointer;
+            accent-color: var(--success);
+        }
+
+        .checklist-item.checked .chk-label {
+            text-decoration: line-through;
+            color: var(--muted-text);
+        }
     </style>
 </head>
 
@@ -1232,75 +1292,142 @@
             {
                 day: "Day 1", date: "05-18(一)", dateShort: "18(一)",
                 events: [
-                    { time: "04:30", location: "托運報到", content: "CI278 報到 (第2航廈)，06:55 起飛。預計 10:35 抵達高松機場", item: "護照、機票", cost: "——", qty: "2", total: "——" },
-                    { time: "11:15", location: "<span class='loc-pin'>📍</span> 機場巴士", content: "[現金上車] 投幣 ¥1,000<br><span class='badge-bus'>🚌 機場利木津巴士</span><a href='https://maps.google.com/?q=高松瓦町駅' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$210", qty: "2", total: "$420" },
-                    { time: "12:00", location: "<span class='loc-pin'>📍</span> 飯店寄行李", content: "抵達 fav 高松 (瓦町站旁)<a href='https://maps.google.com/?q=FAV+HOTEL+TAKAMATSU' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "飯店憑證", cost: "已預付", qty: "1", total: "——" },
-                    { time: "12:15", location: "<span class='loc-pin'>📍</span> 購買 ICOCA", content: "[步行 5 分鐘] 瓦町站慢慢買實體卡<br><div style='background:var(--note-blue-bg); border:1px solid var(--weather-border); padding:10px; border-radius:4px; margin-top:8px; font-size:12px; line-height:1.6;'><b style='color:var(--accent-hover); font-size:13px;'>ℹ️ 具體位置：</b><br>請前往 <b>瓦町站 2 樓</b> 的檢票口（改札口）旁 的 「琴電服務窗口 (窗口)」。<br><br><b style='color:var(--accent-hover); font-size:13px;'>🛒 購買流程：</b><br>1. <b>步行 5 分鐘</b> 到達瓦町站 2 樓大廳<br>2. 進入大廳尋找「琴電服務窗口 / 定期券売場」<br>3. 向窗口人員示意購買 <b>ICOCA (イコカ)</b><br>4. 支付 <b>¥4,500 現金</b> (含 ¥500 押金 + ¥4,000 額度)</div>💡 跟悠遊卡一樣，上下公車或進出車站感應即可", item: "現金", cost: "$945", qty: "2", total: "$1,890" },
-                    { time: "13:30", location: "<span class='loc-pin'>📍</span> 豐富午餐", content: "【天勝】：步行 12 分鐘抵達<a href='https://maps.google.com/?q=天勝本店+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "信用卡/現金", cost: "$700", qty: "2", total: "$1,400" },
-                    { time: "15:00", location: "<span class='loc-pin'>📍</span> 栗林公園", content: "園林散步、搭乘南湖和船 (20分鐘)<a href='https://maps.google.com/?q=栗林公園' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 栗林公園</a><div class='img-row'><img src='images/day1/ritsurin-garden-bridge.jpg' class='spot-img' alt='栗林公園石橋' loading='lazy' width='120' height='70'><img src='images/day1/ritsurin-garden-boat.jpg' class='spot-img' alt='栗林公園南湖遊船' loading='lazy' width='120' height='70'><img src='images/day1/ritsurin-garden-rocks.jpg' class='spot-img' alt='栗林公園奇岩' loading='lazy' width='120' height='70'><img src='images/day1/ritsurin-garden-summer.jpg' class='spot-img' alt='栗林公園夏景' loading='lazy' width='120' height='70'></div>", item: "門票", cost: "$216", qty: "2", total: "$432" },
-                    { time: "16:30", location: "<span class='loc-pin'>📍</span> 掬月亭", content: "坐在茶屋喝抹茶、配和菓子欣賞湖景<a href='https://maps.google.com/?q=掬月亭' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 掬月亭</a><div class='img-row'><img src='images/day1/kikugetsutei-tea-house.jpg' class='spot-img' alt='掬月亭抹茶體驗' loading='lazy' width='120' height='70'></div>", item: "現金", cost: "$150", qty: "2", total: "$300" },
-                    { time: "17:30", location: "<span class='loc-pin'>📍</span> 輕食晚餐", content: "【こよみ】：家庭定食。從公園步行 5 分鐘回飯店區<a href='https://maps.google.com/?q=こよみ+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$450", qty: "2", total: "$900" }
+                    { time: "04:30", location: "托運報到", content: "桃園機場第二航廈 CI278 報到，06:55 起飛<a href='https://maps.google.com/?q=桃園機場第二航廈' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "護照、機票", cost: "已預付", qty: "2", total: "——" },
+                    { time: "06:55", location: "航班起飛", content: "CI278 桃園 → 高松 (預計 10:20 抵達)<a href='https://maps.google.com/?q=高松機場' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "護照", cost: "已預付", qty: "2", total: "——" },
+                    { time: "10:30", location: "抵達高松", content: "抵達高松機場，入境＋領行李（預留約 40 分鐘）", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "11:15", location: "<span class='loc-pin'>📍</span> 機場巴士", content: "[利木津巴士] 高松空港 → 瓦町 (可到瓦町、中央公園前、高松站)<br><span class='badge-bus'>🚌 機場利木津巴士</span><a href='https://maps.google.com/?q=高松瓦町駅' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "Suica/現金", cost: "$210", qty: "2", total: "$420" },
+                    { time: "12:00", location: "<span class='loc-pin'>📍</span> 飯店寄行李", content: "抵達 fav 高松 (瓦町站旁) 辦理寄放行李<a href='https://maps.google.com/?q=FAV+HOTEL+TAKAMATSU' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "飯店憑證", cost: "已預付", qty: "1", total: "——" },
+                    { time: "12:10", location: "<span class='loc-pin'>📍</span> 購買交通卡", content: "瓦町站周邊處理交通卡/儲值，建議一次補足未來 4 天額度<a href='https://maps.google.com/?q=瓦町駅' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a><br><div style='background:var(--note-blue-bg); border:1px solid var(--weather-border); padding:10px; border-radius:4px; margin-top:8px; font-size:12px; line-height:1.6;'><b style='color:var(--accent-hover); font-size:13px;'>ℹ️ 使用說明：</b><br>香川縣公車與琴電皆可感應支付。若已有卡片(含手機版)直接儲值即可。</div>", item: "Suica/現金", cost: "約$945", qty: "2", total: "約$1,890" },
+                    { time: "13:00", location: "<span class='loc-pin'>📍</span> 午餐", content: "天勝天丼<a href='https://maps.google.com/?q=天勝本店+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "信用卡/現金", cost: "$700", qty: "2", total: "$1,400" },
+                    { time: "14:30", location: "<span class='loc-pin'>📍</span> 栗林公園", content: "園內散步，5 月開園時間 05:30–18:30<a href='https://maps.google.com/?q=栗林公園' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 栗林公園</a><div class='img-row'><img src='images/day1/ritsurin-garden-bridge.jpg' class='spot-img' alt='栗林公園石橋' loading='lazy' width='120' height='70'><img src='images/day1/ritsurin-garden-boat.jpg' class='spot-img' alt='栗林公園南湖遊船' loading='lazy' width='120' height='70'></div>", item: "門票", cost: "$216", qty: "2", total: "$432" },
+                    { time: "15:30", location: "<span class='loc-pin'>📍</span> 掬月亭茶屋", content: "抹茶＋和菓子看湖景（優先入亭）；**最後入亭 16:00**，需在此之前入亭<a href='https://maps.google.com/?q=掬月亭' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 掬月亭</a><div class='img-row'><img src='images/day1/kikugetsutei-tea-house.jpg' class='spot-img' alt='掬月亭抹茶體驗' loading='lazy' width='120' height='70'></div>", item: "現金", cost: "$150", qty: "2", total: "$300" },
+                    { time: "16:15", location: "園內散步 / 和船備案", content: "若已預約或現場有票，可搭南湖周遊和船；若無票則改園內散步。和船約 **30 分鐘**，當日票自 **8:30** 起售", item: "——", cost: "依實付", qty: "2", total: "——" },
+                    { time: "17:30", location: "<span class='loc-pin'>📍</span> 商店街散步", content: "丸龜町商店街逛街<a href='https://maps.google.com/?q=丸龜町商店街+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "18:30", location: "<span class='loc-pin'>📍</span> 晚餐", content: "壽司 / 海鮮類晚餐（點餐時主動註明不吃雞肉）<a href='https://maps.google.com/?q=壽司+高松市' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "信用卡", cost: "$650", qty: "2", total: "$1,300" }
                 ]
             },
             {
                 day: "Day 2", date: "05-19(二)", dateShort: "19(二)",
                 events: [
-                    { time: "06:30", location: "早起早餐", content: "享用 fav 飯店早起早餐組合 (訂單含 2 份)", item: "——", cost: "已含", qty: "2", total: "——" },
-                    { time: "08:02", location: "<span class='loc-pin'>📍</span> 渡輪接駁", content: "四國渡輪標準船｜高松港→土庄港｜船程 60 分鐘，平穩舒適，可在甲板吹風看海<br><span class='badge-ferry'>⛴️ 四國渡輪標準船</span><a href='https://maps.google.com/?q=高松港' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 高松港</a>", item: "現金/刷卡", cost: "$294", qty: "2", total: "$588" },
-                    { time: "09:02", location: "<span class='loc-pin'>📍</span> 抵達小豆島", content: "土庄港。參觀「太陽的贈禮」藝術裝置<div class='img-row'><img src='images/day2/sun-gift-sculpture.jpg' class='spot-img' alt='太陽的贈禮藝術裝置' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "09:30", location: "<span class='loc-pin'>📍</span> 景點散步", content: "步行前往土渕海峽 (世界最窄海峽) 與「迷路之街」<div class='img-row'><img src='images/day2/maze-town-alley.jpg' class='spot-img' alt='迷路之街巷弄' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "11:15", location: "交通移動", content: "搭乘「坂手線」或「南廻り福田線」｜土庄本町(迷路之街附近)→オリーブ公園口｜車程約 25 分鐘｜到站後需步行一小段上坡才會抵達風車<br><span class='badge-bus'>🚌 坂手線／南廻り福田線</span><a href='http://www.shodoshima-olive-bus.com/dia.html' target='_blank' rel='noopener noreferrer' class='map-link'>⌚ 橄欖公車時刻表</a>", item: "ICOCA(扣款)", cost: "$63", qty: "2", total: "*(內扣)*" },
-                    { time: "12:30", location: "<span class='loc-pin'>📍</span> 豐富午餐", content: "【Restle】：橄欖豬炸豬排。位於橄欖公園內<a href='https://maps.google.com/?q=Restle+小豆島' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$378", qty: "2", total: "$756" },
-                    { time: "14:00", location: "<span class='loc-pin'>📍</span> 橄欖公園", content: "漫步橄欖林拍照、風車取景、租借掃帚<a href='https://maps.google.com/?q=小豆島橄欖公園' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 橄欖公園</a><div class='img-row'><img src='images/day2/olive-park-windmill.jpg' class='spot-img' alt='橄欖公園風車' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "15:00", location: "交通移動", content: "往回程土庄港方向搭乘｜オリーブ公園口→国際ホテル(天使之路)｜車程約 20 分鐘｜下車後步行 3 分鐘即達沙堤<br><span class='badge-bus'>🚌 小豆島公車</span><a href='http://www.shodoshima-olive-bus.com/dia.html' target='_blank' rel='noopener noreferrer' class='map-link'>⌚ 橄欖公車時刻表</a>", item: "ICOCA(扣款)", cost: "$63", qty: "2", total: "*(內扣)*" },
-                    { time: "15:30", location: "<span class='loc-pin'>📍</span> 天使之路", content: "漫步海中央沙堤，吹海風放空 (行李寄高松飯店)<a href='https://maps.google.com/?q=天使之路+小豆島' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 天使之路</a><div class='img-row'><img src='images/day2/shodoshima-angel-road.jpg' class='spot-img' alt='天使之路沙堤' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "17:30", location: "<span class='loc-pin'>📍</span> 輕食晚餐", content: "岡田屋】：在地居酒屋。港口旁步行 5 分鐘<a href='https://maps.google.com/?q=岡田屋+土庄' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$500", qty: "2", total: "$1,000" },
-                    { time: "18:30", location: "<span class='loc-pin'>📍</span> 回程渡輪", content: "四國渡輪標準船｜土庄港→高松港｜逛完居酒屋後步行至港口，直接出示早上買的來回票即可上船<br><span class='badge-ferry'>⛴️ 四國渡輪標準船</span>", item: "實體船票", cost: "含於去程", qty: "2", total: "——" }
+                    { time: "07:00", location: "飯店早餐", content: "fav 高松早餐（JUNE COFFEE Morning 7:00–10:00）", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "07:45", location: "回房整理", content: "吃完早餐後回房整理、拿隨身物品", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "08:15", location: "<span class='loc-pin'>📍</span> 出發前往高松港", content: "由飯店出發前往高松港，保留步行/找月台/找碼頭緩衝<br><span class='badge-train'>🚃 步行或電車</span><a href='https://maps.google.com/?q=高松港' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 高松港</a>", item: "ICOCA", cost: "依實付", qty: "2", total: "*(內扣)*" },
+                    { time: "09:00", location: "<span class='loc-pin'>📍</span> 一般渡輪", content: "高松 → 土庄港（一般渡輪）<br><span class='badge-ferry'>⛴️ 四國渡輪一般渡輪</span><a href='https://maps.google.com/?q=高松港' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 高松港</a>", item: "船票", cost: "$294", qty: "2", total: "$588" },
+                    { time: "10:00", location: "<span class='loc-pin'>📍</span> 抵達小豆島", content: "抵達後整理、確認公車站位置、港口周邊短暫拍照（不再硬塞完整土庄散步）<a href='https://maps.google.com/?q=土庄港' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "10:20", location: "<span class='loc-pin'>📍</span> 公車", content: "土庄港 → オリーブ公園口<br><span class='badge-bus'>🚌 小豆島公車</span>", item: "ICOCA / 現金", cost: "約¥300", qty: "2", total: "*(內扣)*" },
+                    { time: "10:50", location: "<span class='loc-pin'>📍</span> 抵達橄欖公園", content: "由オリーブ公園口步行進園<a href='https://maps.google.com/?q=小豆島橄欖公園' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 橄欖公園</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "11:00", location: "<span class='loc-pin'>📍</span> 橄欖公園散步", content: "先逛風車、魔女掃帚拍照點與園區<a href='https://maps.google.com/?q=小豆島橄欖公園' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 橄欖公園</a><div class='img-row'><img src='images/day2/olive-park-windmill.jpg' class='spot-img' alt='橄欖公園風車' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "12:00", location: "<span class='loc-pin'>📍</span> 午餐", content: "Restle 橄欖豬排（保留正餐、取消咖啡）<a href='https://maps.google.com/?q=Restle+小豆島' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$378", qty: "2", total: "$756" },
+                    { time: "13:10", location: "<span class='loc-pin'>📍</span> 橄欖公園續逛", content: "午餐後繼續園區散步、補拍照<a href='https://maps.google.com/?q=小豆島橄欖公園' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 橄欖公園</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "14:19", location: "交通移動", content: "オリーブ公園口 → 土庄港（14:19 → 14:47）<br><span class='badge-bus'>🚌 小豆島公車</span>", item: "ICOCA / 現金", cost: "依實付", qty: "2", total: "*(內扣)*" },
+                    { time: "14:47", location: "<span class='loc-pin'>📍</span> 回到土庄港", content: "下車後直接轉往天使之路方向<a href='https://maps.google.com/?q=土庄港' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "14:50", location: "步行前往天使之路", content: "土庄港 → 天使之路步行約 30 分鐘<a href='https://maps.google.com/?q=天使之路+小豆島' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "15:20", location: "<span class='loc-pin'>📍</span> 抵達天使之路周邊", content: "提前到場等待退潮，保留潮位與拍照餘裕<a href='https://maps.google.com/?q=天使之路+小豆島' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "15:43 之後", location: "<span class='loc-pin'>📍</span> 天使之路", content: "2026/5/19 下午可通行時段為 15:43–21:43<a href='https://maps.google.com/?q=天使之路+小豆島' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 天使之路</a><div class='img-row'><img src='images/day2/shodoshima-angel-road.jpg' class='spot-img' alt='天使之路沙堤' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "16:50", location: "步行回土庄港方向", content: "天使之路周邊 → 土庄港周邊，保留晚餐與登船緩衝<a href='https://maps.google.com/?q=土庄港' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "17:20", location: "<span class='loc-pin'>📍</span> 晚餐", content: "岡田屋或土庄周邊晚餐（提早吃，避免趕船）<a href='https://maps.google.com/?q=岡田屋+土庄' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$500", qty: "2", total: "$1,000" },
+                    { time: "18:20", location: "回到港口候船", content: "晚餐後回港、預留驗票與排隊時間<a href='https://maps.google.com/?q=土庄港' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "18:40", location: "<span class='loc-pin'>📍</span> 一般渡輪回程", content: "土庄 → 高松（18:40 → 19:40，一般渡輪）<b>⚠️ 勿誤搭高速艇</b><br><span class='badge-ferry'>⛴️ 四國渡輪一般渡輪</span>", item: "船票", cost: "單程/往復依實際購買", qty: "2", total: "——" }
                 ]
             },
             {
                 day: "Day 3", date: "05-20(三)", dateShort: "20(三)",
                 events: [
-                    { time: "06:30", location: "早起早餐", content: "享用 fav 飯店早餐後退房。前往琴電瓦町站", item: "——", cost: "已含", qty: "2", total: "——" },
-                    { time: "07:20", location: "交通移動", content: "高松出發 → 琴平站 (搭乘琴電)", item: "ICOCA(扣款)", cost: "$134", qty: "2", total: "*(內扣)*" },
-                    { time: "08:35", location: "<span class='loc-pin'>📍</span> 💡飯店寄行李", content: "抵達琴平後步行 5 分直奔「御宿 敷島館」(訂單:9483) 寄放行李，輕裝上山<a href='https://maps.google.com/?q=琴平溫泉御宿敷島館' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "飯店憑證", cost: "已預付", qty: "1", total: "——" },
-                    { time: "08:45", location: "<span class='loc-pin'>📍</span> 參拜", content: "輕裝漫步！金刀比羅宮主參道與正殿（視體力走到大門內段）<a href='https://maps.google.com/?q=金刀比羅宮' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 金刀比羅宮</a><div class='img-row'><img src='images/day3/konpira-shrine.jpg' class='spot-img' alt='金刀比羅宮參道' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "10:45", location: "回程散步", content: "參道商店街簡單逛、吃點小吃", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "12:30", location: "<span class='loc-pin'>📍</span> 豐富午餐", content: "【田中屋】：牛肉烏龍麵與壽司。步行 3 分鐘<a href='https://maps.google.com/?q=田中屋+琴平' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$210", qty: "2", total: "$420" },
-                    { time: "13:30", location: "空檔補足", content: "參道周邊散步/回飯店大廳休息等待 Check-in", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "17:00", location: "<span class='loc-pin'>📍</span> 私人湯屋", content: "享用飯店 4 種免費 私人湯屋 (竹、檜、陶、岩) <div class='img-row'><img src='images/day3/private-onsen-bath.jpg' class='spot-img' alt='敷島館私人湯屋' loading='lazy' width='120' height='70'></div>", item: "——", cost: "已含", qty: "2", total: "——" },
-                    { time: "17:30", location: "<span class='loc-pin'>📍</span> 輕食晚餐", content: "【利神】：在地居酒屋單點串燒。步行 8 分鐘<a href='https://maps.google.com/?q=利神+琴平' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "信用卡", cost: "$700", qty: "2", total: "$1,400" }
+                    { time: "07:00", location: "早餐", content: "fav 高松早餐（JUNE COFFEE Morning 7:00–10:00）", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "07:40", location: "回房整理/退房準備", content: "吃完早餐後回房整理、退房", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "08:04", location: "交通", content: "瓦町 → 琴電琴平（琴電）<br><span class='badge-train'>🚃 琴電琴平線</span><a href='https://maps.google.com/?q=琴電琴平' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "ICOCA", cost: "依實付", qty: "2", total: "*(內扣)*" },
+                    { time: "09:02", location: "<span class='loc-pin'>📍</span> 抵達琴平", content: "步行前往敷島館寄行李<a href='https://maps.google.com/?q=琴平溫泉御宿敷島館' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "飯店訂單", cost: "已付", qty: "1", total: "——" },
+                    { time: "09:15", location: "<span class='loc-pin'>📍</span> 金刀比羅宮", content: "登階參拜（輕裝）<a href='https://maps.google.com/?q=金刀比羅宮' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 金刀比羅宮</a><div class='img-row'><img src='images/day3/konpira-shrine.jpg' class='spot-img' alt='金刀比羅宮參道' loading='lazy' width='120' height='70'></div>", item: "水、毛巾", cost: "——", qty: "2", total: "——" },
+                    { time: "11:45", location: "參道散步", content: "小吃＋紀念品<a href='https://maps.google.com/?q=金刀比羅宮表參道' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "12:45", location: "<span class='loc-pin'>📍</span> 午餐", content: "田中屋牛肉烏龍麵<a href='https://maps.google.com/?q=田中屋+琴平' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$210", qty: "2", total: "$420" },
+                    { time: "15:00", location: "<span class='loc-pin'>📍</span> 咖啡休息", content: "琴平參道周邊咖啡店（現場選擇）<a href='https://maps.google.com/?q=琴平參道+咖啡' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$150", qty: "2", total: "$300" },
+                    { time: "16:00", location: "回飯店/休息", content: "預留 check-in 前後休息時間", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "17:00", location: "<span class='loc-pin'>📍</span> 私人湯屋", content: "敷島館 4 種湯屋<div class='img-row'><img src='images/day3/private-onsen-bath.jpg' class='spot-img' alt='敷島館私人湯屋' loading='lazy' width='120' height='70'></div>", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "18:30", location: "<span class='loc-pin'>📍</span> 晚餐", content: "溫泉旅館會席料理（可事先備註不吃雞肉）", item: "已含", cost: "——", qty: "2", total: "——" }
                 ]
             },
             {
                 day: "Day 4", date: "05-21(四)", dateShort: "21(四)",
                 events: [
-                    { time: "06:30", location: "早起朝湯", content: "早餐前清晨使用私人湯屋", item: "——", cost: "已含", qty: "2", total: "——" },
-                    { time: "07:00", location: "飯店早餐", content: "享用敷島館精緻早餐後退房", item: "——", cost: "已含", qty: "2", total: "——" },
-                    { time: "08:30", location: "交通移動", content: "琴平出發 → 高松市區 (搭乘琴電)", item: "ICOCA(扣款)", cost: "$134", qty: "2", total: "*(內扣)*" },
-                    { time: "10:00", location: "<span class='loc-pin'>📍</span> 飯店寄行李", content: "直奔 Dormy Inn 寄放行李，全程免拖行", item: "護照", cost: "已預付", qty: "1", total: "——" },
-                    { time: "10:30", location: "抵達市區", content: "丸龜町商店街周邊散步、伴手禮採買<br><div style='background:var(--note-amber-bg); border:1px solid var(--note-amber-border); padding:10px; border-radius:4px; margin-top:8px; font-size:12px; line-height:1.6;'><b style='color:var(--note-amber-text);'>🛍️ 推薦伴手禮：</b><br>• <b>和三盆糖</b>（ばいこう堂）— 精緻季節花卉造型，入口即化，送長輩首選<br>• <b>瓦煎餅</b>（宗家くつわ堂）— 高松名物，瓦片造型，越嚼越香，辦公室分送<br>• <b>瀨戶內海雜貨</b> — 小豆島橄欖油、檸檬果醬、藝術祭風格帆布包</div>", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "13:00", location: "<span class='loc-pin'>📍</span> 飯店進房", content: "入住 Dormy Inn 高松 (訂單:9597)<a href='https://maps.google.com/?q=Dormy+Inn+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "護照", cost: "已預付", qty: "1", total: "——" },
-                    { time: "14:00", location: "<span class='loc-pin'>📍</span> 豐富午餐", content: "【燒肉 Hirai】：橄欖牛燒肉。由飯店步行 5 分鐘<a href='https://maps.google.com/?q=燒肉Hirai+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "信用卡", cost: "$840", qty: "2", total: "$1,680" },
-                    { time: "15:30", location: "前往屋島", content: "市區出發 → 屋島", item: "ICOCA(扣款)", cost: "$210", qty: "2", total: "*(內扣)*" },
-                    { time: "16:30", location: "<span class='loc-pin'>📍</span> 屋島展望台", content: "搭車往屋島山上看日落景致<a href='https://maps.google.com/?q=屋島展望台' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 屋島展望台</a><div class='img-row'><img src='images/day4/yashima-seto-sea-view.jpg' class='spot-img' alt='屋島瀨戶內海景' loading='lazy' width='120' height='70'><img src='images/day4/yashima-panorama.jpg' class='spot-img' alt='屋島全景展望' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
-                    { time: "18:30", location: "<span class='loc-pin'>📍</span> 輕食晚餐", content: "【瀨戶內 Kitchen】：精緻家庭和食。步行 6 分鐘<a href='https://maps.google.com/?q=瀨戶內Kitchen+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$500", qty: "2", total: "$1,000" },
-                    { time: "21:30", location: "<span class='loc-pin'>📍</span> 宵夜拉麵", content: "飯店免費 夜鳴拉麵 (1 樓提供)", item: "——", cost: "免費", qty: "2", total: "——" }
+                    { time: "07:00", location: "早餐", content: "敷島館早餐（7:00～最終入場9:00 / 退席9:30） <a href='https://www.jalan.net/yad372625/qa/0005601341.html' target='_blank' rel='noopener noreferrer' class='map-link'>📎 Jalan Q&A</a>", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "07:45", location: "退房準備", content: "吃完早餐後回房整理，不急著衝出門", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "08:30", location: "交通", content: "琴平 → 高松市區<br><span class='badge-train'>🚃 琴電</span>", item: "ICOCA", cost: "依實付", qty: "2", total: "*(內扣)*" },
+                    { time: "10:00", location: "<span class='loc-pin'>📍</span> 寄行李", content: "Dormy Inn 高松<a href='https://maps.google.com/?q=Dormy+Inn+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "護照", cost: "已付", qty: "1", total: "——" },
+                    { time: "10:30", location: "商店街", content: "丸龜町採買伴手禮 / 市區散步<a href='https://maps.google.com/?q=丸龜町商店街+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "12:15", location: "<span class='loc-pin'>📍</span> 午餐", content: "燒肉 / 橄欖牛午餐（午餐前移，避免 14:00 太晚）<a href='https://maps.google.com/?q=燒肉Hirai+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "信用卡", cost: "$840", qty: "2", total: "$1,680" },
+                    { time: "13:20", location: "返回飯店 / 辦理入住", content: "回 Dormy Inn 辦理入住、稍作休息<a href='https://maps.google.com/?q=Dormy+Inn+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "護照", cost: "已付", qty: "1", total: "——" },
+                    { time: "15:20", location: "出發前往屋島", content: "從市區前往 ことでん屋島站 / JR屋島站<br><span class='badge-train'>🚃 琴電/JR</span>", item: "ICOCA", cost: "依實付", qty: "2", total: "*(內扣)*" },
+                    { time: "16:00 後", location: "<span class='loc-pin'>📍</span> 屋島上山接駁", content: "轉乘屋島山上接駁巴士上山；官方確認區間為 JR屋島站・ことでん屋島站・四國村 ⇔ 屋島山上，大人均一 200 日圓<br><span class='badge-bus'>🚌 屋島山上接駁巴士</span> <a href='https://www.kotoden.co.jp/publichtm/bus/rosen/yashima/index.html' target='_blank' rel='noopener noreferrer' class='map-link'>📎 官方時刻</a>", item: "ICOCA / 現金", cost: "¥200", qty: "2", total: "*(內扣)*" },
+                    { time: "16:30 後", location: "<span class='loc-pin'>📍</span> 屋島展望台", content: "屋島山上散步、看景、等日落<a href='https://maps.google.com/?q=屋島展望台' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ 屋島展望台</a><div class='img-row'><img src='images/day4/yashima-seto-sea-view.jpg' class='spot-img' alt='屋島瀨戶內海景' loading='lazy' width='120' height='70'></div>", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "18:30 後", location: "下山接駁", content: "屋島山上 → 屋島站周邊<br><span class='badge-bus'>🚌 屋島山上接駁巴士</span>", item: "ICOCA / 現金", cost: "¥200", qty: "2", total: "*(內扣)*" },
+                    { time: "19:15", location: "<span class='loc-pin'>📍</span> 晚餐", content: "瀨戶內海鮮料理（點餐時主動註明不吃雞肉）<a href='https://maps.google.com/?q=瀨戶內海鮮料理+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "現金", cost: "$500", qty: "2", total: "$1,000" },
+                    { time: "21:30", location: "宵夜", content: "Dormy Inn 夜鳴拉麵（如需避雞，可現場確認配料）", item: "——", cost: "免費", qty: "2", total: "——" }
                 ]
             },
             {
                 day: "Day 5", date: "05-22(五)", dateShort: "22(五)",
                 events: [
-                    { time: "06:30", location: "早起早餐", content: "享用 Dormy Inn 溫泉飯店早餐", item: "——", cost: "已含", qty: "2", total: "——" },
-                    { time: "09:10", location: "<span class='loc-pin'>📍</span> 機場巴士", content: "「縣廳通」站搭車，就在飯店旁，免拉行李移動<a href='https://maps.google.com/?q=縣廳通站+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "ICOCA(扣款)", cost: "$210", qty: "2", total: "*(內扣)*" },
-                    { time: "10:30", location: "<span class='loc-pin'>📍</span> 💡機場採買", content: "高松機場免稅店掃貨，用 ICOCA 餘額清零結帳<br><div style='background:var(--note-amber-bg); border:1px solid var(--note-amber-border); padding:10px; border-radius:4px; margin-top:8px; font-size:12px; line-height:1.6;'><b style='color:var(--note-amber-text);'>🛍️ 推薦伴手禮：</b><br>• <b>名物かまど</b> — 灶爐造型日式點心，黃豆沙內餡不過甜，香川最經典<br>• <b>半生讚岐烏龍麵</b>（盒裝）— 附高湯包，在家水煮即還原 Q 彈口感<br>• <b>骨付鳥風味零食</b> — 濃郁黑胡椒蒜香洋芋片，絕佳下酒菜<br><br><b style='color:var(--accent-hover);'>💡 ICOCA 清零：</b>向店員說「ICOCA で払います、残りは現金で」，餘額一毛不浪費！卡片帶回台灣做紀念</div>", item: "卡/現金", cost: "——", qty: "——", total: "——" },
-                    { time: "11:30", location: "<span class='loc-pin'>📍</span> 歸途起飛", content: "CI279 返台 (13:15 抵達桃園)<a href='https://maps.google.com/?q=高松機場' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a>", item: "護照", cost: "已預付", qty: "2", total: "——" }
+                    { time: "06:45", location: "早餐", content: "Dormy Inn 高松早餐（6:30–9:30，最終入店9:00）", item: "——", cost: "已含", qty: "2", total: "——" },
+                    { time: "07:30", location: "回房整理/最後收行李", content: "吃完早餐後整理退房，留足餘裕", item: "——", cost: "——", qty: "2", total: "——" },
+                    { time: "建議抓更早班機場巴士", location: "<span class='loc-pin'>📍</span> 機場巴士", content: "県庁通り中央公園前 → 高松空港（以當月時刻表為準）<a href='https://maps.google.com/?q=縣廳通站+高松' target='_blank' rel='noopener noreferrer' class='map-link'>🗺️ Google Maps</a><br><span class='badge-bus'>🚌 機場利木津巴士</span>", item: "ICOCA / 現金", cost: "依實付", qty: "2", total: "*(內扣)*" },
+                    { time: "10:30", location: "免稅店", content: "伴手禮採買", item: "信用卡", cost: "——", qty: "——", total: "——" },
+                    { time: "11:30", location: "歸途起飛", content: "CI279 返台 (13:15 抵達桃園)", item: "護照", cost: "已預付", qty: "2", total: "——" }
                 ]
             }
         ];
 
+        const dayTips = [
+            [
+                '掬月亭一定要在 <b>16:00 前入亭</b>；晚到就不適合再硬排。',
+                '和船<b>建議預約</b>，不然以「有票就搭、無票就散步」為原則。',
+                '第一天不要太貪心，重點是<b>平安進市區、順利入住、輕鬆啟動旅程</b>。'
+            ],
+            [
+                '這版的邏輯是：<b>港口不貪心、先上橄欖公園、回港後步行去天使之路</b>。',
+                '因為要搭 <b>10:20 公車</b>，所以土庄港周邊的迷路之街/土渕海峽這天不適合硬塞在上午。',
+                '如果你真的很想保留土庄散步，會建議改成別天或刪減橄欖公園停留，但那會讓 Day2 變得比較趕。',
+                '這版最穩的原因是：<b>每一段轉乘點都清楚，而且天使之路保得住</b>。'
+            ],
+            [
+                '這版改搭 08:04 琴電，早餐終於不會太趕。',
+                '09:02 抵達後再寄行李、上金刀比羅宮，節奏比較像旅行而不是衝刺。',
+                '金刀比羅宮請輕裝上山，行李一定先寄放。'
+            ],
+            [
+                '屋島不是到站就到景點，還要轉 <b>屋島山上シャトルバス</b>。',
+                '接駁巴士大人均一 <b>200 日圓</b>。',
+                '午餐已前移到 <b>12:15</b>，下午屋島行程更從容。',
+                '今天最怕的是晚出門導致山上行程變短，建議午餐後不要拖。'
+            ],
+            [
+                '高松空港巴士時刻會<b>按月份調整</b>，一定要在出發前一週再核對。',
+                '若你打算在機場大採買，行李重量要先留額度。',
+                '最後一天不要把早餐、退房、搭車、購物壓太緊。'
+            ]
+        ];
+
+        const checklistItems = [
+            { id: 'chk-wasen', label: '栗林公園如要搭南湖周遊和船，先決定是否預約' },
+            { id: 'chk-ferry', label: '再確認 5/19 高松↔土庄一般渡輪時刻' },
+            { id: 'chk-angel', label: '再確認 5/19 天使之路潮見表' },
+            { id: 'chk-yashima', label: '再確認 5/21 屋島山上接駁巴士班次' },
+            { id: 'chk-airport', label: '再確認 5/22 高松空港巴士當月時刻表' }
+        ];
+
+        function getChecklistState() {
+            try { return JSON.parse(localStorage.getItem('tripChecklist') || '{}'); }
+            catch { return {}; }
+        }
+
+        function toggleCheck(id) {
+            const state = getChecklistState();
+            state[id] = !state[id];
+            localStorage.setItem('tripChecklist', JSON.stringify(state));
+            render();
+        }
+
         let currentTab = 0; // 0 = 準備, 1-5 = Day1-5
-        let currentPrepTab = 'flight'; // flight, hotel, prep, pack, info
+        let currentPrepTab = 'flight'; // flight, hotel, prep, pack, info, checklist
 
         // === 費用計算與頁尾更新 ===
         function calculateGlobalTotals() {
@@ -1414,7 +1541,7 @@
                                 <span style="font-size:12px; color:#666;">📍 760-0052 香川県高松市瓦町2-10-10</span><br>
                                 <span style="font-size:12px; color:#666;">☎️ 050-3131-4191</span><br>
                                 訂單編號：ORD0029070089<br>
-                                15:00入住, 10:00退房
+                                15:00入住, 10:00退房<br>早餐：7:00–10:00（JUNE COFFEE Morning）
                             </td>
                             <td data-label="房型">高級客房 1張大床</td>
                             <td class="center red-text" data-label="費用">TWD 7,618</td>
@@ -1426,7 +1553,7 @@
                                 <span style="font-size:12px; color:#666;">📍 766-0001 香川県仲多度郡琴平町川西713-1</span><br>
                                 <span style="font-size:12px; color:#666;">☎️ 0877-58-8001</span><br>
                                 訂單編號：ORD0029069483<br>
-                                15:00入住, 11:00退房, 享用4種私湯
+                                15:00入住, 11:00退房, 享用4種私湯<br>早餐：7:00～最終入場9:00 / 退席9:30
                             </td>
                             <td data-label="房型">雙人房 1張大床</td>
                             <td class="center red-text" data-label="費用">TWD 5,907</td>
@@ -1438,7 +1565,7 @@
                                 <span style="font-size:12px; color:#666;">📍 760-0052 香川県高松市瓦町1-10-10</span><br>
                                 <span style="font-size:12px; color:#666;">☎️ 087-832-5489</span><br>
                                 訂單編號：ORD0029069597<br>
-                                15:00入住, 11:00退房, 有免費宵夜拉麵
+                                15:00入住, 11:00退房, 有免費宵夜拉麵<br>早餐：6:30–9:30（最終入店9:00）
                             </td>
                             <td data-label="房型">標準房 1張大床</td>
                             <td class="center red-text" data-label="費用">TWD 4,699</td>
@@ -1487,29 +1614,44 @@
                 contentHtml = `
                     <div class="pack-columns" style="display:flex; justify-content:space-between; font-size:14px; line-height:1.8;">
                         <div style="flex:1; padding-right:20px;">
-                            <h3 class="prep-title">個人攜帶物品</h3>
-                            1. ⬜ 護照 (效期需滿半年)<br>
-                            2. ⬜ 行動電源 + 充電線<br>
-                            3. ⬜ 手機<br>
-                            4. ⬜ 日本網卡 (已附退卡針)<br>
-                            5. ⬜ 錢包 (日幣現金、行動支付、感應信用卡)<br>
-                            6. ⬜ 隨身水壺<br>
-                            7. ⬜ 帽子 + 防曬薄外套<br>
-                            8. ⬜ 面紙、濕紙巾<br>
-                            9. ⬜ 個人藥品 + 保健食物 5天份<br>
-                            10. ⬜ 四天份換洗衣物 (洋蔥式穿搭)<br>
-                            11. ⬜ 牙刷、牙膏<br>
-                            12. ⬜ 拖鞋或舒適好走的布鞋<br>
-                            13. ⬜ 外出用隨身小包
+                            <h3 class="prep-title">證件 / 票券</h3>
+                            1. ⬜ 護照<br>
+                            2. ⬜ 機票 / 電子登機證<br>
+                            3. ⬜ 旅遊保險單<br>
+                            4. ⬜ 飯店訂單<br>
+                            5. ⬜ 重要預約截圖<br>
+                            6. ⬜ 信用卡<br>
+                            7. ⬜ 少量日圓現金<br>
+                            <br>
+                            <h3 class="prep-title">每天都會用到</h3>
+                            8. ⬜ 手機<br>
+                            9. ⬜ 充電線<br>
+                            10. ⬜ 行動電源<br>
+                            11. ⬜ 耳機<br>
+                            12. ⬜ 面紙 / 濕紙巾<br>
+                            13. ⬜ 小毛巾<br>
+                            14. ⬜ 摺疊購物袋<br>
+                            15. ⬜ 輕便雨具
                         </div>
                         <div style="flex:1;">
-                            <h3 class="prep-title">共同準備物品</h3>
-                            1. ⬜ 各式電子訂單憑證 (機票、飯店、QR Code截圖)<br>
-                            2. ⬜ 自拍棒或穩定器<br>
-                            3. ⬜ 萬用變壓器/擴充插座 (非必需，日本兩孔即可)<br>
-                            4. ⬜ 雨傘 (晴雨兩用)<br>
-                            5. ⬜ 出國備用藥 (腸胃藥、止痛藥、暈車藥)<br>
-                            6. ⬜ 行李秤<br>
+                            <h3 class="prep-title">穿著</h3>
+                            16. ⬜ 好走的步行鞋<br>
+                            17. ⬜ 薄外套<br>
+                            18. ⬜ 換洗衣物<br>
+                            19. ⬜ 泡湯後替換衣物<br>
+                            <br>
+                            <h3 class="prep-title">個人用品</h3>
+                            20. ⬜ 保養品<br>
+                            21. ⬜ 防曬<br>
+                            22. ⬜ 個人藥品<br>
+                            23. ⬜ OK 繃<br>
+                            24. ⬜ 腸胃藥 / 止痛藥<br>
+                            25. ⬜ 暈船藥（若需要）<br>
+                            <br>
+                            <h3 class="prep-title">泡湯 / 飯店</h3>
+                            26. ⬜ 束髮圈<br>
+                            27. ⬜ 小化妝包<br>
+                            28. ⬜ 需要的保養品<br>
                             <br>
                             <h3 class="prep-title">實用資源</h3>
                             - 手機可用：<b>Google Translate</b> 鏡頭掃描翻譯<br>
@@ -1527,6 +1669,22 @@
                         <li>📍 <b>護照遺失處理步驟</b><br>1. 先至最近警察局報案，取得「遺失申報證明書」<br>2. 攜帶照片2張及身分證件，至代表處申請入國證明書</li>
                     </ul>
                 `;
+            } else if (currentPrepTab === 'checklist') {
+                const chkState = getChecklistState();
+                const doneCount = checklistItems.filter(c => chkState[c.id]).length;
+                const totalCount = checklistItems.length;
+                contentHtml = `
+                    <h3 class="prep-title">出發前核對清單</h3>
+                    <p style="font-size:13px; color:var(--muted-text-strong); margin-bottom:5px;">建議於出發前 3～7 天逐項確認</p>
+                    <div class="checklist-progress">${doneCount === totalCount ? '✅ <span class="chk-done">全部完成！</span>' : `已完成 <span class="chk-done">${doneCount}</span> / ${totalCount} 項`}</div>
+                `;
+                checklistItems.forEach(item => {
+                    const checked = chkState[item.id] ? true : false;
+                    contentHtml += `<label class="checklist-item ${checked ? 'checked' : ''}">
+                        <input type="checkbox" ${checked ? 'checked' : ''} onchange="toggleCheck('${item.id}')">
+                        <span class="chk-label">${item.label}</span>
+                    </label>`;
+                });
             }
 
             return `
@@ -1537,6 +1695,7 @@
                         <button type="button" class="prep-menu-item ${currentPrepTab === 'prep' ? 'active' : ''}" role="tab" aria-selected="${currentPrepTab === 'prep'}" tabindex="${currentPrepTab === 'prep' ? 0 : -1}" data-prep="prep">事前準備</button>
                         <button type="button" class="prep-menu-item ${currentPrepTab === 'pack' ? 'active' : ''}" role="tab" aria-selected="${currentPrepTab === 'pack'}" tabindex="${currentPrepTab === 'pack' ? 0 : -1}" data-prep="pack">攜帶物品</button>
                         <button type="button" class="prep-menu-item ${currentPrepTab === 'info' ? 'active' : ''}" role="tab" aria-selected="${currentPrepTab === 'info'}" tabindex="${currentPrepTab === 'info' ? 0 : -1}" data-prep="info">備用資訊</button>
+                        <button type="button" class="prep-menu-item ${currentPrepTab === 'checklist' ? 'active' : ''}" role="tab" aria-selected="${currentPrepTab === 'checklist'}" tabindex="${currentPrepTab === 'checklist' ? 0 : -1}" data-prep="checklist">核對清單</button>
                     </div>
                     <div class="prep-content">
                         ${contentHtml}
@@ -1560,14 +1719,17 @@
             // ICOCA usage summary
             const icocaPurchasePP = 945; // per person TWD (¥4,500 = ¥500 deposit + ¥4,000 balance)
             const icocaRoutes = [
-                { route: '小豆島公車（市區→橄欖公園）', fare: '$63' },
-                { route: '小豆島公車（橄欖公園→天使之路）', fare: '$63' },
-                { route: '琴電（高松↔琴平）往', fare: '$134' },
-                { route: '琴電（琴平→高松）返', fare: '$134' },
-                { route: '屋島交通（市區→屋島）', fare: '$210' },
-                { route: '機場巴士（縣廳通→高松機場）', fare: '$210' }
+                { route: '出發前往高松港', fare: '依實付' },
+                { route: '小豆島公車（土庄港→橄欖公園口）', fare: '依實付' },
+                { route: '小豆島公車（橄欖公園口→天使之路）', fare: '依實付' },
+                { route: '琴電（瓦町→琴電琴平）', fare: '依實付' },
+                { route: '琴電（琴平→高松市區）', fare: '依實付' },
+                { route: '屋島交通（市區→屋島）', fare: '依實付' },
+                { route: '屋島上山接駁巴士', fare: '依實付' },
+                { route: '屋島下山接駁巴士', fare: '依實付' },
+                { route: '機場巴士（県庁通り→高松空港）', fare: '依實付' }
             ];
-            const icocaTotalPP = 63 + 63 + 134 + 134 + 210 + 210;
+            const icocaTotalPP = 0;
             const dailyTWD = itineraryData.map(day => {
                 let daySum = 0;
                 day.events.forEach(ev => {
@@ -1642,10 +1804,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td data-label="票券名稱">💳 ICOCA 卡（實體）</td>
-                        <td class="center red-text" data-label="購買金額">$${icocaPurchasePP.toLocaleString()}<br><span style="font-size:12px;color:#666;">（每人，含 ¥500 押金）</span></td>
-                        <td class="center" data-label="實際使用金額">$${icocaTotalPP.toLocaleString()}<br><span style="font-size:12px;color:#666;">（每人交通扣款）</span></td>
-                        <td data-label="使用明細" style="font-size:13px;">${icocaRoutes.map(u => u.route + ' ' + u.fare).join('<br>')}<br>💡 購入時一次儲值 ¥4,000，全程車資已涵蓋（餘 ¥124）</td>
+                        <td data-label="票券名稱">💳 Suica / ICOCA 卡</td>
+                        <td class="center red-text" data-label="購買金額">$${icocaPurchasePP.toLocaleString()}<br><span style="font-size:12px;color:#666;">（建議儲值約 ¥4,500）</span></td>
+                        <td class="center" data-label="實際使用金額">依實際使用<br><span style="font-size:12px;color:#666;">（交通感應支付合計）</span></td>
+                        <td data-label="使用明細" style="font-size:13px;">${icocaRoutes.map(u => u.route + ' ' + u.fare).join('<br>')}<br>💡 全程感應支付，餘額可於 Day 5 機場便利商店清零</td>
                     </tr>
                 </tbody>
             </table>`;
@@ -1741,7 +1903,21 @@
             html += `
                     <tr class="daily-total-row"><td colspan="4"></td><td colspan="3" style="text-align: right;">當日累計：<span class="red-text">$${dailyTotal.toLocaleString()}</span></td></tr>
                 </tbody>
-            </table></div>`;
+            </table>`;
+
+            // Daily tips
+            const tips = dayTips[dayIndex];
+            if (tips && tips.length) {
+                html += `<div class="day-tips">
+                    <div class="day-tips-title">⚠️ 當日注意事項</div>
+                    <ul class="day-tips-list">`;
+                tips.forEach(tip => {
+                    html += `<li>${tip}</li>`;
+                });
+                html += `</ul></div>`;
+            }
+
+            html += '</div>';
             return html;
         }
 
