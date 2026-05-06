@@ -2,7 +2,8 @@ const CACHE_NAME = 'trip-v6';
 const ASSETS = [
   './',
   './index.html',
-  './manifest.json'
+  './manifest.json',
+  './images/icon-512.png'
 ];
 
 // 安裝：快取靜態資源
